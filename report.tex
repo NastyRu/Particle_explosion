@@ -1,0 +1,60 @@
+\documentclass[a4paper,14pt]{article} % формат документа
+
+\usepackage{cmap} % поиск в ПДФ
+\usepackage[T2A]{fontenc} % кодировка
+\usepackage[utf8]{inputenc} % кодировка исходного текста
+\usepackage[english,russian]{babel} % локализация и переносы
+\usepackage[left = 2cm, right = 1cm, top = 2cm, bottom = 2 cm]{geometry} % поля
+\usepackage{listings}
+\usepackage{graphicx} % для вставки рисунков
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\newcommand{\anonsection}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+
+\lstset{ 
+	language=C++,  % Язык программирования 
+	numbers=left,  % С какой стороны нумеровать          
+	frame=single,  % Добавить рамку
+}
+
+\begin{document}
+	\begin{titlepage}
+	
+	\end{titlepage}
+    
+	\tableofcontents
+	
+	\newpage
+    
+	\anonsection{Введение}
+	\hfill
+	
+	\newpage
+
+
+	\section{Аналитическая часть}
+	\hfill
+        
+	\newpage
+
+	\section{Конструкторская часть}
+	\hfill
+	
+	\newpage
+	\section{Технологическая часть}
+	\hfill
+	\newpage
+        
+	\section{Экспериментальная часть}
+	\hfill
+	\newpage
+
+	\anonsection{Заключение}
+	\hfill
+ 	\newpage
+
+	\begin{thebibliography}{}
+        		\bibitem{}
+	\end{thebibliography} 
+
+\end{document}
