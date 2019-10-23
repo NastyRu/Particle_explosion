@@ -9,21 +9,35 @@ using namespace std;
 class Matrix
 {
 public:
-    Matrix() {
-        matrix = vector<vector<double>>(4, vector<double>(4, 0));
-    }
-    Matrix(Point_3d point) {
-        matrix = vector<vector<double>>(4, vector<double>(4, 0));
-        matrix[0][0] = 1;
-        matrix[0][3] = -point.get_x();
-        matrix[1][1] = 1;
-        matrix[1][3] = -point.get_y();
-        matrix[2][3] = -1 / point.get_z();
-        matrix[3][3] = 1;
+    Matrix() {}
+    Matrix(int row, int col) {
+        matrix = vector<vector<double>>(row, vector<double>(col, 0));
     }
     ~Matrix() {}
 
     vector<double> operator *(const vector<double> &vec);
+    Matrix operator *(Matrix &vec);
+
+    class Row {
+        friend class Matrix;
+        public:
+            double& operator[](int col) {
+                return parent.matrix[row][col];
+            }
+            int size() {
+                return parent.matrix[row].size();
+            }
+        private:
+            Row(Matrix &parent_, int row_) : parent(parent_), row(row_) {
+            }
+
+            Matrix& parent;
+            int row;
+        };
+
+    Row operator [](int row) {
+        return Row(*this, row);
+    }
 
 private:
     vector<vector<double>> matrix;
