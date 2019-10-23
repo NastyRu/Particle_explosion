@@ -12,10 +12,6 @@ Transfrom_manager Facade::get_transfrom_manager() {
     return transfrom_manager;
 }
 
-Delete_manager Facade::get_delete_manager() {
-    return delete_manager;
-}
-
 Scene_container &Facade::get_scene_container() {
     return scene_container;
 }

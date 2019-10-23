@@ -36,7 +36,6 @@ SOURCES += \
     exceptions.cpp \
     facade.cpp \
     file_loader.cpp \
-    file_save.cpp \
     iterators.cpp \
     managers.cpp \
     matrix.cpp \
@@ -58,7 +57,6 @@ HEADERS += \
     exceptions.h \
     facade.h \
     file_loader.h \
-    file_save.h \
     iterators.h \
     managers.h \
     matrix.h \

@@ -5,7 +5,7 @@ class Base_builder
 {
 public:
     Base_builder() {}
-    ~Base_builder() {}
+    virtual ~Base_builder() {}
 };
 
 #endif // BASE_BUILDER_H

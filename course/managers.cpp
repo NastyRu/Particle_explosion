@@ -4,15 +4,6 @@ shared_ptr<Model> Work_with_file_manager::loader_from_file(File_loader &file_loa
     return file_loader.load_model(builder);
 }
 
-void Work_with_file_manager::save_to_file(File_save &file_save, objects_iterator begin, objects_iterator end) {
-    for (objects_iterator i = begin; i != end; i++) {
-        if (!(*i)->is_compose() && (*i)->is_visible()) {
-            Object *object = (*i).get();
-            file_save.save_model(make_shared<Model>(*((Model*)object)));
-        }
-    }
-}
-
 void Draw_manager::draw_model(Base_draw &drawer, objects_iterator begin, objects_iterator end) {
     for (objects_iterator i = begin; i != end; i++) {
         if (!(*i)->is_compose() && (*i)->is_visible()) {

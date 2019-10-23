@@ -11,7 +11,7 @@ class Model_builder : public Base_builder
 {
 public:
     Model_builder() {}
-    ~Model_builder() {}
+    ~Model_builder() override {}
 
     void build_model();
     void build_particle(double x, double y, double z);

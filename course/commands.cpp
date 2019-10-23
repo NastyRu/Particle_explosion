@@ -21,18 +21,6 @@ void Load_command:: call(Facade &facade) {
     facade.get_scene_container().add_object(model);
 }
 
-Save_command::Save_command(File_save &file_sav, objects_iterator begin) :
-    Command(begin), file_save(file_sav) {
-}
-
-Save_command::Save_command(File_save &file_sav, objects_iterator begin, objects_iterator end) :
-    Command(begin, end), file_save(file_sav) {
-}
-
-void Save_command::call(Facade &facade) {
-    facade.get_work_with_file_manager().save_to_file(file_save, begin, end);
-}
-
 Draw_command::Draw_command(Base_draw &drawe, objects_iterator begin) :
     Command(begin), drawer(drawe) {
 }
