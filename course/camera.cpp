@@ -11,3 +11,42 @@ Point_3d Camera::get_position() {
 Matrix Camera::get_matrix(){
     return matrix;
 }
+
+void Camera::scale(double k) {
+    matrix[0][0] *= k;
+    matrix[1][1] *= k;
+    matrix[2][2] *= k;
+}
+
+void Camera::rotation(double angleX, double angleY) {
+    Matrix matrixX = Matrix(3,3);
+    Matrix matrixY = Matrix(3,3);
+    Matrix cam = Matrix(3,3);
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cam[i][j] = matrix[i][j];
+        }
+    }
+
+    matrixX[0][0] = 1;
+    matrixX[1][1] = cos(angleX);
+    matrixX[1][2] = -sin(angleX);
+    matrixX[2][1] = sin(angleX);
+    matrixX[2][2] = cos(angleX);
+
+    matrixY[0][0] = cos(angleY);
+    matrixY[0][2] = sin(angleY);
+    matrixY[1][1] = 1;
+    matrixY[2][0] = -sin(angleY);
+    matrixY[2][2] = cos(angleY);
+
+    cam = cam * matrixX;
+    cam = cam * matrixY;
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            matrix[i][j] = cam[i][j];
+        }
+    }
+}

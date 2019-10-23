@@ -6,8 +6,8 @@ shared_ptr<Model> Work_with_file_manager::loader_from_file(File_loader &file_loa
 
 void Draw_manager::draw_model(Base_draw &drawer, objects_iterator begin, objects_iterator end) {
     for (objects_iterator i = begin; i != end; i++) {
-        if (!(*i)->is_compose() && (*i)->is_visible()) {
-            Object *object = (*i).get();
+        if ((*i)->is_visible()) {
+            Object* object = (*i).get();
             Model model = *((Model*)object);
             draw_iter_model(drawer, model);
         }
@@ -24,8 +24,8 @@ void Draw_manager::draw_iter_model(Base_draw &drawer, Model model) {
 
 void Transfrom_manager::offset_model(double dx, double dy, double dz, objects_iterator begin, objects_iterator end, positions_iterator pos) {
     for (objects_iterator i = begin; i != end; i++, pos++) {
-        if (!(*i)->is_compose() && (*i)->is_visible()) {
-            Object *object = (*i).get();
+        if ((*i)->is_visible()) {
+            Object* object = (*i).get();
             Model* model = ((Model*)object);
             offset_iter_model(model, dx, dy, dz, *(*pos).get());
         }
@@ -43,8 +43,8 @@ void Transfrom_manager::offset_iter_model(Model *model, double dx, double dy, do
 
 void Transfrom_manager::scale_model(double k, objects_iterator begin, objects_iterator end, positions_iterator pos) {
     for (objects_iterator i = begin; i != end; i++, pos++) {
-        if (!(*i)->is_compose() && (*i)->is_visible()) {
-            Object *object = (*i).get();
+        if ((*i)->is_visible()) {
+            Object* object = (*i).get();
             Model* model = ((Model*)object);
             scale_iter_model(model, k, *(*pos).get());
         }
@@ -61,8 +61,8 @@ void Transfrom_manager::scale_iter_model(Model *model, double k, Position &pos) 
 
 void Transfrom_manager::rotate_x_model(double angle, objects_iterator begin, objects_iterator end, positions_iterator pos) {
     for (objects_iterator i = begin; i != end; i++, pos++) {
-        if (!(*i)->is_compose() && (*i)->is_visible()) {
-            Object *object = (*i).get();
+        if ((*i)->is_visible()) {
+            Object* object = (*i).get();
             Model* model = ((Model*)object);
             rotate_x_iter_model(model, angle, *(*pos).get());
         }
@@ -79,8 +79,8 @@ void Transfrom_manager::rotate_x_iter_model(Model *model, double angle, Position
 
 void Transfrom_manager::rotate_y_model(double angle, objects_iterator begin, objects_iterator end, positions_iterator pos) {
     for (objects_iterator i = begin; i != end; i++, pos++) {
-        if (!(*i)->is_compose() && (*i)->is_visible()) {
-            Object *object = (*i).get();
+        if ((*i)->is_visible()) {
+            Object* object = (*i).get();
             Model* model = ((Model*)object);
             rotate_y_iter_model(model, angle, *(*pos).get());
         }
@@ -97,8 +97,8 @@ void Transfrom_manager::rotate_y_iter_model(Model *model, double angle, Position
 
 void Transfrom_manager::rotate_z_model(double angle, objects_iterator begin, objects_iterator end, positions_iterator pos) {
     for (objects_iterator i = begin; i != end; i++, pos++) {
-        if (!(*i)->is_compose() && (*i)->is_visible()) {
-            Object *object = (*i).get();
+        if ((*i)->is_visible()) {
+            Object* object = (*i).get();
             Model* model = ((Model*)object);
             rotate_z_iter_model(model, angle, *(*pos).get());
         }
@@ -111,4 +111,16 @@ void Transfrom_manager::rotate_z_iter_model(Model *model, double angle, Position
         p.rotate_z(angle, pos.get_center());
         model->get_var_particles()[i].set_p(p);
     }
+}
+
+void Transfrom_manager::scale_camera(double k, objects_iterator begin) {
+    Object *object = (*begin).get();
+    Camera* camera = ((Camera*)object);
+    camera->scale(k);
+}
+
+void Transfrom_manager::rotate_camera(double angleX, double angleY, objects_iterator begin) {
+    Object *object = (*begin).get();
+    Camera* camera = ((Camera*)object);
+    camera->rotation(angleX, angleY);
 }

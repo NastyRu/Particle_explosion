@@ -114,4 +114,28 @@ private:
     double angle;
 };
 
+class Scale_camera_command : Command
+{
+public:
+    Scale_camera_command(double k, objects_iterator begin);
+    ~Scale_camera_command() override {}
+
+    void call(Facade & facade) override;
+
+private:
+    double k;
+};
+
+class Rotate_camera_command : Command
+{
+public:
+    Rotate_camera_command(double angleX, double angleY, objects_iterator begin);
+    ~Rotate_camera_command() override {}
+
+    void call(Facade & facade) override;
+
+private:
+    double angleX, angleY;
+};
+
 #endif // COMMANDS_H

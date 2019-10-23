@@ -9,6 +9,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    shared_ptr<Camera> cam = make_shared<Camera>(Camera(Point_3d(300,300,-100)));
+    shared_ptr<Position> pos = make_shared<Position>(Position(Point_3d(300,300,-100)));
+    facade.get_scene_container().add_object(cam);
+    facade.get_scene_container().add_position(pos);
+    facade.get_scene_container().set_current_camera(cam);
     ui->setupUi(this);
 }
 
@@ -20,9 +25,9 @@ MainWindow::~MainWindow()
 void MainWindow::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
-    Camera cam(Point_3d(0,0,-100));
+    Object *cam = facade.get_scene_container().get_current_camera()->get();
     if (facade.get_scene_container().get_objects().size() > 0) {
-        DrawQt drawer(p, cam);
+        DrawQt drawer(p, *(Camera*)cam);
         Draw_command command(drawer, facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object());
         command.call(facade);
     }
@@ -117,13 +122,56 @@ void MainWindow::on_pushButton_4_clicked()
 
     repaint();
 }
-
+//go
 void MainWindow::on_pushButton_5_clicked()
 {
-    QString filename = QFileDialog::getSaveFileName(nullptr, "Open Dialog", "", "*.txt");
-    const char *f = filename.toStdString().c_str();
+}
 
-    File_save file_save(f);
-    Save_command command(file_save, facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object());
+//+
+void MainWindow::on_pushButton_6_clicked()
+{
+    Scale_camera_command command(2, facade.get_scene_container().get_current_camera());
     command.call(facade);
+
+    repaint();
+}
+//-
+void MainWindow::on_pushButton_7_clicked()
+{
+    Scale_camera_command command(0.5, facade.get_scene_container().get_current_camera());
+    command.call(facade);
+
+    repaint();
+}
+//right
+void MainWindow::on_pushButton_9_clicked()
+{
+    Rotate_camera_command command(0, 10 * M_PI / 180, facade.get_scene_container().get_current_camera());
+    command.call(facade);
+
+    repaint();
+}
+//up
+void MainWindow::on_pushButton_11_clicked()
+{
+    Rotate_camera_command command(-10 * M_PI / 180, 0, facade.get_scene_container().get_current_camera());
+    command.call(facade);
+
+    repaint();
+}
+//down
+void MainWindow::on_pushButton_10_clicked()
+{
+    Rotate_camera_command command(10 * M_PI / 180, 0, facade.get_scene_container().get_current_camera());
+    command.call(facade);
+
+    repaint();
+}
+//right
+void MainWindow::on_pushButton_8_clicked()
+{
+    Rotate_camera_command command(0, -10 * M_PI / 180, facade.get_scene_container().get_current_camera());
+    command.call(facade);
+
+    repaint();
 }

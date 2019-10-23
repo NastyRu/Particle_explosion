@@ -6,6 +6,7 @@
 #include "iterators.h"
 #include "base_draw.h"
 #include "positions.h"
+#include "camera.h"
 
 class Base_manager
 {
@@ -53,6 +54,9 @@ public:
 
     void rotate_z_model(double angle, objects_iterator begin, objects_iterator end, positions_iterator pos);
     void rotate_z_iter_model(Model *model, double angle, Position &pos);
+
+    void scale_camera(double k, objects_iterator begin);
+    void rotate_camera(double angleX, double angleY, objects_iterator begin);
 };
 
 #endif // MANAGERS_H

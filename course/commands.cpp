@@ -116,3 +116,22 @@ Rotate_z_command::Rotate_z_command(double angle, objects_iterator begin, objects
 void Rotate_z_command::call(Facade &facade) {
     facade.get_transfrom_manager().rotate_z_model(angle, begin, end, pos);
 }
+
+Scale_camera_command::Scale_camera_command(double k, objects_iterator begin) :
+    Command(begin) {
+    this->k = k;
+}
+
+void Scale_camera_command::call(Facade &facade) {
+    facade.get_transfrom_manager().scale_camera(k, begin);
+}
+
+Rotate_camera_command::Rotate_camera_command(double angleX, double angleY, objects_iterator begin) :
+    Command(begin) {
+    this->angleX = angleX;
+    this->angleY = angleY;
+}
+
+void Rotate_camera_command::call(Facade &facade) {
+    facade.get_transfrom_manager().rotate_camera(angleX, angleY, begin);
+}

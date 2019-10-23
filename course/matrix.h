@@ -28,7 +28,8 @@ public:
                 return parent.matrix[row].size();
             }
         private:
-            Row(Matrix &parent_, int row_) : parent(parent_), row(row_) {
+            Row(Matrix &parent_, int row_) :
+                parent(parent_), row(row_) {
             }
 
             Matrix& parent;

@@ -13,7 +13,6 @@ public:
     ~Object() {}
 
     virtual bool is_visible() = 0;
-    virtual bool is_compose() = 0;
 };
 
 class Visible_object : public Object
@@ -23,7 +22,6 @@ public:
     ~Visible_object() {}
 
     bool is_visible() override {return true;}
-    bool is_compose() override {return false;}
 };
 
 class Unvisible_object : public Object
@@ -33,7 +31,6 @@ public:
     ~Unvisible_object() {}
 
     bool is_visible() override {return false;}
-    bool is_compose() override {return false;}
 };
 
 #endif // OBJECTS_H

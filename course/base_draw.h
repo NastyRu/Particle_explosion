@@ -7,7 +7,7 @@ class Base_draw
 {
 public:
     Base_draw() {}
-    ~Base_draw() {}
+    virtual ~Base_draw() {}
 
     virtual void drawline(Point_3d begin, Point_3d end) = 0;
     virtual void drawpoint(Point_3d point) = 0;

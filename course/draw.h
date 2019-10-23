@@ -9,8 +9,8 @@
 class DrawQt : public Base_draw
 {
 public:
-    DrawQt(QPainter &pa, Camera & cam) : p(pa), camera(cam) {}
-    ~DrawQt() {}
+    DrawQt(QPainter &pa, Camera &cam) : p(pa), camera(cam) {}
+    ~DrawQt() override {}
 
     void drawline(Point_3d begin, Point_3d end) override;
     void drawpoint(Point_3d point) override;
