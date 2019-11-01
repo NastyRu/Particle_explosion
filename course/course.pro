@@ -45,7 +45,8 @@ SOURCES += \
     positions.cpp \
     scene_container.cpp \
     points.cpp \
-    particles.cpp
+    particles.cpp \
+    ground.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -67,7 +68,8 @@ HEADERS += \
     scene_container.h \
     points.h \
     particles.h \
-    camera.h
+    camera.h \
+    ground.h
 
 FORMS += \
         mainwindow.ui

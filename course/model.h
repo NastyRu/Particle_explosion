@@ -22,6 +22,7 @@ public:
     int get_kol_particles();
 
     vector<Particle> &get_var_particles();
+    char type() override { return 'm'; }
 private:
     vector<Particle> particles;
 };

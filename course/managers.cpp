@@ -8,10 +8,28 @@ void Draw_manager::draw_model(Base_draw &drawer, objects_iterator begin, objects
     for (objects_iterator i = begin; i != end; i++) {
         if ((*i)->is_visible()) {
             Object* object = (*i).get();
-            Model model = *((Model*)object);
-            draw_iter_model(drawer, model);
+            Visible_object* vobject = (Visible_object*)object;
+            char c = vobject->type();
+            switch (c) {
+                case 'm': {
+                    Model model = *((Model*)object);
+                    draw_iter_model(drawer, model);
+                    break;
+                }
+                case 'g': {
+                    Ground ground = *((Ground*)object);
+                    draw_ground(drawer, ground);
+                    break;
+                }
+            }
+
         }
     }
+}
+
+void Draw_manager::draw_ground(Base_draw &drawer, Ground ground) {
+    vector<Point_3d> p = ground.get_points();
+    drawer.drawpolygon(p[0], p[1], p[2], p[3]);
 }
 
 void Draw_manager::draw_iter_model(Base_draw &drawer, Model model) {

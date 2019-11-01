@@ -18,7 +18,6 @@ public:
         matrix[2][2] = 1;
         matrix[2][3] = -1 / pos.get_z();
         matrix[3][3] = 1;
-
         is_current = 1;
     }
     ~Camera() {}

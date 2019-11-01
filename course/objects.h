@@ -22,6 +22,7 @@ public:
     ~Visible_object() {}
 
     bool is_visible() override {return true;}
+    virtual char type() = 0;
 };
 
 class Unvisible_object : public Object
