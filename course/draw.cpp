@@ -75,7 +75,10 @@ void DrawQt::drawpolygon(Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
 
     for (int x = max(0, xmin); x < min(800, xmax); x++) {
         for (int y = max(0, ymin); y < min(700, ymax); y++) {
-            if (coef[2] != 0 && (1 - coef[0] * x - coef[1] * y) / coef[2] > buf.pixel(x, y))
+            if (buf.pixel(x, y) == -1000) {
+                buf.setz(x, y, (1 - coef[0] * x - coef[1] * y) / coef[2]);
+            }
+            if (buf.pixel(x, y) != 0 && (1 - coef[0] * x - coef[1] * y) / coef[2] > -1 / buf.pixel(x, y))
                 buf.setz(x, y, (1 - coef[0] * x - coef[1] * y) / coef[2]);
         }
     }
