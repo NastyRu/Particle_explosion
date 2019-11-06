@@ -5,6 +5,8 @@
 #include <QPainter>
 #include "points.h"
 #include "camera.h"
+#include "buffer.h"
+#include <cmath>
 #include <QPolygon>
 
 class DrawQt : public Base_draw
@@ -20,6 +22,7 @@ public:
 private:
     QPainter &p;
     Camera &camera;
+    Zbuffer buf;
 };
 
 #endif // DRAW_H

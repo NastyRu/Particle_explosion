@@ -13,10 +13,16 @@ public:
     Matrix(int row, int col) {
         matrix = vector<vector<double>>(row, vector<double>(col, 0));
     }
+    Matrix(int row, int col, int value) {
+        matrix = vector<vector<double>>(row, vector<double>(col, value));
+    }
     ~Matrix() {}
 
     vector<double> operator *(const vector<double> &vec);
     Matrix operator *(Matrix &vec);
+    int size() {
+        return matrix.size();
+    }
 
     class Row {
         friend class Matrix;

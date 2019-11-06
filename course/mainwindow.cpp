@@ -31,9 +31,6 @@ void MainWindow::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
     p.setClipRect(0, 0, width() - 320, height());
-    for (int i = 0; i < 1000; i++) {
-
-    }
     Object *cam = facade.get_scene_container().get_current_camera()->get();
     if (facade.get_scene_container().get_objects().size() > 0) {
         DrawQt drawer(p, *(Camera*)cam);
