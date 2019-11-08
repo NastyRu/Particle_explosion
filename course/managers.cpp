@@ -143,42 +143,41 @@ void Transfrom_manager::rotate_camera(double angleX, double angleY, objects_iter
     camera->rotation(angleX, angleY);
 }
 
-void Explosion_manager::explosion(objects_iterator begin, objects_iterator end, positions_iterator pos) {
-    for (objects_iterator i = begin; i != end; i++, pos++) {
+void Explosion_manager::explosion(objects_iterator begin, objects_iterator end, Point_3d pos) {
+    for (objects_iterator i = begin; i != end; i++) {
         if ((*i)->is_visible()) {
             Object* object = (*i).get();
             Model* model = ((Model*)object);
             if (model->type() == 'm') {
-                explosion_iter(model, *(*pos).get());
+                explosion_iter(model, pos);
             }
         }
     }
 }
 
-void Explosion_manager::explosion_iter(Model *model, Position &pos) {
+void Explosion_manager::explosion_iter(Model *model, Point_3d &pos) {
     for (int i = 0; i < model->get_kol_particles(); i++) {
         Point_3d p = model->get_var_particles()[i].get_p();
         Point_3d p2;
-        Point_3d c(100, 200, 100);
         double d = 100.0;
 
-        if (c.get_x() < p.get_x()) {
+        if (pos.get_x() < p.get_x()) {
             p2.set_x(p.get_x() + 100);
-            d /= (p.get_x() - c.get_x());
-        } else if (c.get_x() > p.get_x()) {
+            d /= (p.get_x() - pos.get_x());
+        } else if (pos.get_x() > p.get_x()) {
             p2.set_x(p.get_x() - 100);
-            d /= (c.get_x() - p.get_x());
+            d /= (pos.get_x() - p.get_x());
         } else {
             p2.set_x(p.get_x());
         }
 
-        if (p.get_y() < c.get_y()) {
+        if (p.get_y() < pos.get_y()) {
             //p2.set_y(p.get_y() - 100);
-            d *= (c.get_y() - p.get_y());
+            d *= (pos.get_y() - p.get_y());
             p2.set_y(p.get_y() - d);
-        } else if (p.get_y() > c.get_y()) {
+        } else if (p.get_y() > pos.get_y()) {
             //p2.set_y(p.get_y() + 100);
-            d *= (p.get_y() - c.get_y());
+            d *= (p.get_y() - pos.get_y());
             p2.set_y(p.get_y() + d);
         } else {
             p2.set_y(p.get_y() + 100);

@@ -199,8 +199,30 @@ void MainWindow::on_pushButton_8_clicked()
 // go
 void MainWindow::on_pushButton_12_clicked()
 {
-    Explosion_command command(facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), facade.get_scene_container().get_begin_position());
+    Point_3d pos (100, 200, 100);
+    Explosion_command command(facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), pos);
     command.call(facade);
 
     repaint();
 }
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    Point_3d pos;
+    pos.set_x(event->pos().x());
+    pos.set_y(event->pos().y());
+    pos.set_z(0);
+
+    vector<double> p1 = {pos.get_x(), pos.get_y(), pos.get_z(), 1};
+    Object *cam = facade.get_scene_container().get_current_camera()->get();
+    vector<double> p2 = (*(Camera*)cam).get_matrix() * p1;
+
+    pos.set_x(p2[0] - 600);
+    pos.set_y(p2[1] - 600);
+
+    Explosion_command command(facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), pos);
+    command.call(facade);
+
+    repaint();
+}
+

@@ -136,7 +136,7 @@ void Rotate_camera_command::call(Facade &facade) {
     facade.get_transfrom_manager().rotate_camera(angleX, angleY, begin);
 }
 
-Explosion_command::Explosion_command(objects_iterator begin, objects_iterator end, positions_iterator pos) :
+Explosion_command::Explosion_command(objects_iterator begin, objects_iterator end, Point_3d pos) :
     Command(begin, end) {
     this->pos = pos;
 }
