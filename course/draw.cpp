@@ -65,8 +65,6 @@ void DrawQt::drawpolygon(Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
     ymin = min(int(p0[1]), ymin);
     ymax = max(int(p0[1]), ymax);
 
-    //qDebug() << xmin << ' ' << xmax << ' ' << ymin << ' ' << ymax << endl;
-
     vector<double> coef(4);
     coef[3] = -x[0] * (y[1] * z[2] - y[2] * z[1]) - x[1] * (y[2] * z[0] - y[0] * z[2]) - x[2] * (y[0] * z[1] - y[1] * z[0]);
     coef[0] = (y[0] * (z[1] - z[2]) + y[1] * (z[2] - z[0]) + y[2] * (z[0] - z[1])) / coef[3];
@@ -75,14 +73,13 @@ void DrawQt::drawpolygon(Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
 
     for (int x = max(0, xmin); x < min(800, xmax); x++) {
         for (int y = max(0, ymin); y < min(700, ymax); y++) {
-            if (buf.pixel(x, y) == -1000) {
+            if (buf.pixel(x, y) == -10000) {
                 buf.setz(x, y, (1 - coef[0] * x - coef[1] * y) / coef[2]);
             }
             if (buf.pixel(x, y) != 0 && (1 - coef[0] * x - coef[1] * y) / coef[2] > -1 / buf.pixel(x, y))
                 buf.setz(x, y, (1 - coef[0] * x - coef[1] * y) / coef[2]);
         }
     }
-
 
     p.setPen(QPen(Qt::black));
     QBrush brush;

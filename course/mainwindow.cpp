@@ -128,9 +128,24 @@ void MainWindow::on_pushButton_4_clicked()
 
     repaint();
 }
-//go
+//clear
 void MainWindow::on_pushButton_5_clicked()
 {
+    facade.get_scene_container().get_objects().clear();
+    facade.get_scene_container().get_positions().clear();
+
+    shared_ptr<Camera> cam = make_shared<Camera>(Camera(Point_3d(300,300,-100)));
+    shared_ptr<Position> pos = make_shared<Position>(Position(Point_3d(300,300,-100)));
+    facade.get_scene_container().add_object(cam);
+    facade.get_scene_container().add_position(pos);
+    facade.get_scene_container().set_current_camera(cam);
+
+    shared_ptr<Ground> ground = make_shared<Ground>(Ground(Point_3d(-300,200,0),Point_3d(500,200,0),Point_3d(500,200,600),Point_3d(-300,200,600)));
+    pos = make_shared<Position>(Position(Point_3d(300,200,300)));
+    facade.get_scene_container().add_object(ground);
+    facade.get_scene_container().add_position(pos);
+
+    repaint();
 }
 
 //+
@@ -177,6 +192,14 @@ void MainWindow::on_pushButton_10_clicked()
 void MainWindow::on_pushButton_8_clicked()
 {
     Rotate_camera_command command(0, -10 * M_PI / 180, facade.get_scene_container().get_current_camera());
+    command.call(facade);
+
+    repaint();
+}
+// go
+void MainWindow::on_pushButton_12_clicked()
+{
+    Explosion_command command(facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), facade.get_scene_container().get_begin_position());
     command.call(facade);
 
     repaint();

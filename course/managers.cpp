@@ -142,3 +142,48 @@ void Transfrom_manager::rotate_camera(double angleX, double angleY, objects_iter
     Camera* camera = ((Camera*)object);
     camera->rotation(angleX, angleY);
 }
+
+void Explosion_manager::explosion(objects_iterator begin, objects_iterator end, positions_iterator pos) {
+    for (objects_iterator i = begin; i != end; i++, pos++) {
+        if ((*i)->is_visible()) {
+            Object* object = (*i).get();
+            Model* model = ((Model*)object);
+            if (model->type() == 'm') {
+                explosion_iter(model, *(*pos).get());
+            }
+        }
+    }
+}
+
+void Explosion_manager::explosion_iter(Model *model, Position &pos) {
+    for (int i = 0; i < model->get_kol_particles(); i++) {
+        Point_3d p = model->get_var_particles()[i].get_p();
+        Point_3d p2;
+        Point_3d c(100, 200, 100);
+        double d = 100.0;
+
+        if (c.get_x() < p.get_x()) {
+            p2.set_x(p.get_x() + 100);
+            d /= (p.get_x() - c.get_x());
+        } else if (c.get_x() > p.get_x()) {
+            p2.set_x(p.get_x() - 100);
+            d /= (c.get_x() - p.get_x());
+        } else {
+            p2.set_x(p.get_x());
+        }
+
+        if (p.get_y() < c.get_y()) {
+            //p2.set_y(p.get_y() - 100);
+            d *= (c.get_y() - p.get_y());
+            p2.set_y(p.get_y() - d);
+        } else if (p.get_y() > c.get_y()) {
+            //p2.set_y(p.get_y() + 100);
+            d *= (p.get_y() - c.get_y());
+            p2.set_y(p.get_y() + d);
+        } else {
+            p2.set_y(p.get_y() + 100);
+        }
+        p2.set_z(p.get_z());
+        model->get_var_particles()[i].set_p(p2);
+    }
+}

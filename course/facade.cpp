@@ -15,3 +15,7 @@ Transfrom_manager Facade::get_transfrom_manager() {
 Scene_container &Facade::get_scene_container() {
     return scene_container;
 }
+
+Explosion_manager &Facade::get_explosion_manager() {
+    return explosion_manager;
+}

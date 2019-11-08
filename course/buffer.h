@@ -5,7 +5,7 @@
 
 class Zbuffer{
 public:
-    Zbuffer() { buffer = Matrix(700, 800, -1000); }
+    Zbuffer() { buffer = Matrix(700, 800, -10000); }
     ~Zbuffer() {}
     int pixel(int x, int y);
     void setz(int x, int y, int z);

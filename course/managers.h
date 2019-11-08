@@ -61,4 +61,14 @@ public:
     void rotate_camera(double angleX, double angleY, objects_iterator begin);
 };
 
+class Explosion_manager : public Base_manager
+{
+public:
+    Explosion_manager() {}
+    ~Explosion_manager() {}
+
+    void explosion(objects_iterator begin, objects_iterator end, positions_iterator pos);
+    void explosion_iter(Model *model, Position &pos);
+};
+
 #endif // MANAGERS_H

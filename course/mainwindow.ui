@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1103</width>
-    <height>638</height>
+    <width>1149</width>
+    <height>637</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>780</x>
+      <x>810</x>
       <y>10</y>
       <width>331</width>
       <height>441</height>
@@ -408,7 +408,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Запуск</string>
+        <string>Сброс</string>
        </property>
       </widget>
      </item>
@@ -431,9 +431,9 @@
    <widget class="QWidget" name="gridLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>790</x>
+      <x>870</x>
       <y>480</y>
-      <width>51</width>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
@@ -457,9 +457,9 @@
    <widget class="QWidget" name="gridLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>880</x>
-      <y>460</y>
-      <width>101</width>
+      <x>970</x>
+      <y>450</y>
+      <width>121</width>
       <height>61</height>
      </rect>
     </property>
@@ -494,6 +494,19 @@
      </item>
     </layout>
    </widget>
+   <widget class="QPushButton" name="pushButton_12">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>520</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>GO</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -509,7 +522,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1103</width>
+     <width>1149</width>
      <height>22</height>
     </rect>
    </property>
