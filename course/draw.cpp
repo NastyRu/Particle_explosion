@@ -19,6 +19,15 @@ void DrawQt::drawpoint(Point_3d point) {
     }
 }
 
+void DrawQt::drawcircle(Point_3d point, int r) {
+    vector<double> p1 = {point.get_x(), point.get_y(), point.get_z(), 1};
+    vector<double> p2 = camera.get_matrix() * p1;
+
+    p.setPen(QPen(Qt::red));
+    p.setBrush(QBrush(Qt::white));
+    p.drawEllipse(QPoint(p2[0], p2[1]), r, r);
+}
+
 void DrawQt::drawpolygon(Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
     vector<double> vec = {p1.get_x(), p1.get_y(), p1.get_z(), 1};
     vector<double> p0 = camera.get_matrix() * vec;
@@ -82,13 +91,6 @@ void DrawQt::drawpolygon(Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
     }
 
     p.setPen(QPen(Qt::black));
-    QBrush brush;
-    brush.setColor(Qt::black);
-    brush.setStyle(Qt::SolidPattern);
-    QPainterPath path;
-    path.addPolygon(polygon);
+    p.setBrush(QBrush(Qt::black));
     p.drawPolygon(polygon);
-    p.fillPath(path, brush);
-
-    p.setPen(QPen(Qt::white));
 }

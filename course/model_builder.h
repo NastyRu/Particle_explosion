@@ -14,7 +14,7 @@ public:
     ~Model_builder() override {}
 
     void build_model();
-    void build_particle(double x, double y, double z);
+    void build_particle(double x, double y, double z, int r);
 
     shared_ptr<Model> get_result();
 

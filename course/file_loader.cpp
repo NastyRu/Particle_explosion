@@ -24,14 +24,15 @@ shared_ptr<Model> File_loader::load_model(Model_builder builder) {
     builder.build_model();
 
     double x, y, z;
+    int r;
     int begin, end;
 
     int n;
 
     file >> n;
     for (int i = 0; i < n; i++) {
-        file >> x >> y >> z;
-        builder.build_particle(x, y, z);
+        file >> x >> y >> z >> r;
+        builder.build_particle(x, y, z, r);
     }
 
     return builder.get_result();

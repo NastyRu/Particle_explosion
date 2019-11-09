@@ -36,7 +36,8 @@ void Draw_manager::draw_iter_model(Base_draw &drawer, Model model) {
     vector<Particle> particles = model.get_particles();
     for (int i = 0; i < model.get_kol_particles(); i++) {
         Point_3d p = particles[i].get_p();
-        drawer.drawpoint(p);
+        //drawer.drawpoint(p);
+        drawer.drawcircle(p, particles[i].get_r());
     }
 }
 

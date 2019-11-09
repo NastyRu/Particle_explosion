@@ -8,11 +8,11 @@ void Model_builder::build_model() {
     }
 }
 
-void Model_builder::build_particle(double x, double y, double z) {
+void Model_builder::build_particle(double x, double y, double z, int r) {
     if (!model) {
         throw Builder_exceptions();
     } else {
-        model->add_particle(Particle(Point_3d(x, y, z)));
+        model->add_particle(Particle(Point_3d(x, y, z), r));
     }
 }
 

@@ -7,7 +7,8 @@ class Particle
 {
 public:
     Particle() {}
-    Particle(Point_3d point, Point_3d v, double m);
+    Particle(Point_3d point, Point_3d v, double m, int r);
+    Particle(Point_3d point, int r);
     Particle(Point_3d point);
     ~Particle() {}
 
@@ -20,12 +21,17 @@ public:
     void set_m(const double m);
     double get_m() const;
 
+    void set_r(const int r);
+    int get_r() const;
+
 private:
     Point_3d point;
 
     Point_3d speed;
 
     double m;
+
+    int radius;
 };
 
 #endif // PARTICLES_H
