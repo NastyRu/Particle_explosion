@@ -24,7 +24,7 @@ void DrawQt::drawcircle(Point_3d point, int r) {
     vector<double> p2 = camera.get_matrix() * p1;
 
     p.setPen(QPen(Qt::red));
-    p.setBrush(QBrush(Qt::white));
+    p.setBrush(QBrush(Qt::red));
     p.drawEllipse(QPoint(p2[0], p2[1]), r, r);
 }
 
@@ -93,4 +93,65 @@ void DrawQt::drawpolygon(Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
     p.setPen(QPen(Qt::black));
     p.setBrush(QBrush(Qt::black));
     p.drawPolygon(polygon);
+}
+
+double scalar(Point_3d v1, Point_3d v2) {
+    double s = v1.get_x() * v2.get_x() + v1.get_y() * v2.get_y() + v1.get_z() * v2.get_z();
+    return s;
+}
+
+double IntersectRaySphere(Point_3d camera_pos, Point_3d point, Point_3d centr, int r) {
+    double t1, t2;
+    Point_3d oc(camera_pos.get_x() - centr.get_x(), camera_pos.get_y() - centr.get_y(), camera_pos.get_z() - centr.get_z());
+    Point_3d d(point.get_x() - camera_pos.get_x(), point.get_y() - camera_pos.get_y(), point.get_z() - camera_pos.get_z());
+
+    double k1 = scalar(d, d);
+    double k2 = scalar(oc, d);
+    double k3 = scalar(oc, oc) - r * r;
+
+    double discriminant = k2 * k2 - k1 * k3;
+    if (discriminant < 0)
+        return 0;
+
+    discriminant = sqrt(discriminant);
+    t1 = (-k2 + discriminant) / k1;
+    t2 = (-k2 - discriminant) / k1;
+    return min(t1, t2);
+}
+
+double IntersectRayPlane(Point_3d camera_pos, Point_3d point, Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
+    return 0;
+}
+
+QColor TraceRay(Camera camera, Point_3d point, vector<Point_3d> centr, vector<int> r, Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
+    Point_3d cam(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z());
+    double closest_t = 10000;
+    QColor closest = Qt::white;
+
+    for (int i = 0; i < centr.size(); i++) {
+        double t1 = IntersectRaySphere(cam, point, centr[i], r[i]);
+        double t2 = IntersectRayPlane(cam, point, p1, p2, p3, p4);
+
+        if (t1 > 0 && t1 < closest_t) {
+            closest_t = t1;
+            closest = Qt::red;
+        }
+        if (t2 > 0 && t2 < closest_t) {
+            closest_t = t2;
+            closest = Qt::black;
+        }
+    }
+
+    return closest;
+}
+
+void DrawQt::drawcircles(vector<Point_3d> point, vector<int> r) {
+    for (int x = 0; x < 800; x++) {
+        for (int y = 0; y < 600; y++) {
+            QColor color = TraceRay(camera, Point_3d(x, y, 1), point, r, Point_3d(-300,200,0),Point_3d(500,200,0),Point_3d(500,200,600),Point_3d(-300,200,600));
+            p.setPen(color);
+            p.drawPoint(x, y);
+        }
+        qDebug() << x;
+    }
 }

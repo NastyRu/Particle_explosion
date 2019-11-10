@@ -34,11 +34,17 @@ void Draw_manager::draw_ground(Base_draw &drawer, Ground ground) {
 
 void Draw_manager::draw_iter_model(Base_draw &drawer, Model model) {
     vector<Particle> particles = model.get_particles();
+    vector<Point_3d> point;
+    vector<int> r;
     for (int i = 0; i < model.get_kol_particles(); i++) {
         Point_3d p = particles[i].get_p();
         //drawer.drawpoint(p);
-        drawer.drawcircle(p, particles[i].get_r());
+        //drawer.drawcircle(p, particles[i].get_r());
+        point.push_back(particles[i].get_p());
+        r.push_back(particles[i].get_r());
+
     }
+    drawer.drawcircles(point, r);
 }
 
 void Transfrom_manager::offset_model(double dx, double dy, double dz, objects_iterator begin, objects_iterator end, positions_iterator pos) {
