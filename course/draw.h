@@ -8,6 +8,9 @@
 #include "buffer.h"
 #include <cmath>
 #include <QPolygon>
+#include <thread>
+
+static mutex data_lock;
 
 class DrawQt : public Base_draw
 {

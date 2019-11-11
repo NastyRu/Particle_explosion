@@ -145,13 +145,28 @@ QColor TraceRay(Camera camera, Point_3d point, vector<Point_3d> centr, vector<in
     return closest;
 }
 
-void DrawQt::drawcircles(vector<Point_3d> point, vector<int> r) {
-    for (int x = 0; x < 800; x++) {
+void drawcircles_thread(QPainter &p, Camera &camera, vector<Point_3d> point, vector<int> r, int xmin, int xmax) {
+    for (int x = xmin; x < xmax; x++) {
         for (int y = 0; y < 600; y++) {
             QColor color = TraceRay(camera, Point_3d(x, y, 1), point, r, Point_3d(-300,200,0),Point_3d(500,200,0),Point_3d(500,200,600),Point_3d(-300,200,600));
+            data_lock.lock();
             p.setPen(color);
             p.drawPoint(x, y);
+            data_lock.unlock();
         }
-        qDebug() << x;
+    }
+}
+
+void DrawQt::drawcircles(vector<Point_3d> point, vector<int> r) {
+    vector<thread> threads;
+
+    int dx = 800 / 32;
+
+    for (int i = 0; i < 32; i++) {
+        threads.push_back(thread(drawcircles_thread, ref(p), ref(camera), point, r, 0 + i * dx, (i + 1) * dx));
+    }
+
+    for (int i = 0; i < 32; i++) {
+        threads[i].join();
     }
 }
