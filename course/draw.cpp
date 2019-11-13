@@ -76,17 +76,17 @@ void DrawQt::drawpolygon(Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
 
     vector<double> coef(4);
     coef[3] = -x[0] * (y[1] * z[2] - y[2] * z[1]) - x[1] * (y[2] * z[0] - y[0] * z[2]) - x[2] * (y[0] * z[1] - y[1] * z[0]);
-    coef[0] = (y[0] * (z[1] - z[2]) + y[1] * (z[2] - z[0]) + y[2] * (z[0] - z[1])) / coef[3];
-    coef[1] = (z[0] * (x[1] - x[2]) + z[1] * (x[2] - x[0]) + z[2] * (x[0] - x[1])) / coef[3];
-    coef[2] = (x[0] * (y[1] - y[2]) + x[1] * (y[2] - y[0]) + x[2] * (y[0] - y[1])) / coef[3];
+    coef[0] = (y[0] * (z[1] - z[2]) + y[1] * (z[2] - z[0]) + y[2] * (z[0] - z[1]));
+    coef[1] = (z[0] * (x[1] - x[2]) + z[1] * (x[2] - x[0]) + z[2] * (x[0] - x[1]));
+    coef[2] = (x[0] * (y[1] - y[2]) + x[1] * (y[2] - y[0]) + x[2] * (y[0] - y[1]));
 
     for (int x = max(0, xmin); x < min(800, xmax); x++) {
         for (int y = max(0, ymin); y < min(700, ymax); y++) {
             if (buf.pixel(x, y) == -10000) {
-                buf.setz(x, y, (1 - coef[0] * x - coef[1] * y) / coef[2]);
+                buf.setz(x, y, (coef[3] - coef[0] * x - coef[1] * y) / coef[2]);
             }
             if (buf.pixel(x, y) != 0 && (1 - coef[0] * x - coef[1] * y) / coef[2] > -1 / buf.pixel(x, y))
-                buf.setz(x, y, (1 - coef[0] * x - coef[1] * y) / coef[2]);
+                buf.setz(x, y, (coef[3] - coef[0] * x - coef[1] * y) / coef[2]);
         }
     }
 
@@ -102,8 +102,9 @@ double scalar(Point_3d v1, Point_3d v2) {
 
 double IntersectRaySphere(Point_3d camera_pos, Point_3d point, Point_3d centr, int r) {
     double t1, t2;
-    Point_3d oc(camera_pos.get_x() - centr.get_x(), camera_pos.get_y() - centr.get_y(), camera_pos.get_z() - centr.get_z());
+    Point_3d oc(centr.get_x() - camera_pos.get_x(), centr.get_y() - camera_pos.get_y(), centr.get_z() - camera_pos.get_z());
     Point_3d d(point.get_x() - camera_pos.get_x(), point.get_y() - camera_pos.get_y(), point.get_z() - camera_pos.get_z());
+
 
     double k1 = scalar(d, d);
     double k2 = scalar(oc, d);
@@ -114,23 +115,34 @@ double IntersectRaySphere(Point_3d camera_pos, Point_3d point, Point_3d centr, i
         return 0;
 
     discriminant = sqrt(discriminant);
-    t1 = (-k2 + discriminant) / k1;
-    t2 = (-k2 - discriminant) / k1;
+    t1 = (k2 + discriminant) / k1;
+    t2 = (k2 - discriminant) / k1;
+    if (t1 < 0)
+        return t2;
+    if (t2 < 0)
+        return t1;
+
     return min(t1, t2);
 }
 
-double IntersectRayPlane(Point_3d camera_pos, Point_3d point, Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
+double IntersectRayPlane(Point_3d camera_pos, Point_3d point, vector<double> normal) {
+    Point_3d d(point.get_x() - camera_pos.get_x(), point.get_y() - camera_pos.get_y(), point.get_z() - camera_pos.get_z());
+    double dn = scalar(d, Point_3d(normal[0], normal[1], normal[2]));
+
+    if (fabs(dn) > 0.001) {
+        return (normal[3] - scalar(camera_pos, Point_3d(normal[0], normal[1], normal[2]))) / dn;
+    }
     return 0;
 }
 
-QColor TraceRay(Camera camera, Point_3d point, vector<Point_3d> centr, vector<int> r, Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
+QColor TraceRay(Camera camera, Point_3d point, vector<Point_3d> centr, vector<int> r, vector<double> normal) {
     Point_3d cam(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z());
     double closest_t = 10000;
     QColor closest = Qt::white;
 
     for (int i = 0; i < centr.size(); i++) {
         double t1 = IntersectRaySphere(cam, point, centr[i], r[i]);
-        double t2 = IntersectRayPlane(cam, point, p1, p2, p3, p4);
+        double t2 = IntersectRayPlane(cam, point, normal);
 
         if (t1 > 0 && t1 < closest_t) {
             closest_t = t1;
@@ -145,10 +157,10 @@ QColor TraceRay(Camera camera, Point_3d point, vector<Point_3d> centr, vector<in
     return closest;
 }
 
-void drawcircles_thread(QPainter &p, Camera &camera, vector<Point_3d> point, vector<int> r, int xmin, int xmax) {
+void drawcircles_thread(QPainter &p, Camera &camera, vector<Point_3d> point, vector<int> r, int xmin, int xmax, vector<double> normal) {
     for (int x = xmin; x < xmax; x++) {
         for (int y = 0; y < 600; y++) {
-            QColor color = TraceRay(camera, Point_3d(x, y, 1), point, r, Point_3d(-300,200,0),Point_3d(500,200,0),Point_3d(500,200,600),Point_3d(-300,200,600));
+            QColor color = TraceRay(camera, Point_3d(x, y, 0 - camera.get_position().get_z()), point, r, normal);
             data_lock.lock();
             p.setPen(color);
             p.drawPoint(x, y);
@@ -160,10 +172,50 @@ void drawcircles_thread(QPainter &p, Camera &camera, vector<Point_3d> point, vec
 void DrawQt::drawcircles(vector<Point_3d> point, vector<int> r) {
     vector<thread> threads;
 
-    int dx = 800 / 32;
+    vector<Point_3d> new_point;
+    for (int i = 0; i < point.size(); i++) {
+        vector<double> vec1 = {point[i].get_x(), point[i].get_y(), point[i].get_z(), 1};
+        vector<double> p1 = camera.get_matrix() * vec1;
+        new_point.push_back(Point_3d(p1[0], p1[1], p1[2]));
+    }
 
+    vector<double> vec = {-300, 200, 0, 1};
+    vector<double> p0 = camera.get_matrix() * vec;
+    vector<double> x(3);
+    vector<double> y(3);
+    vector<double> z(3);
+    x[0] = p0[0];
+    y[0] = p0[1];
+    z[0] = p0[2];
+
+    vec = {500, 200, 0, 1};
+    p0 = camera.get_matrix() * vec;
+    x[1] = p0[0];
+    y[1] = p0[1];
+    z[1] = p0[2];
+
+    vec = {500, 200, 600, 1};
+    p0 = camera.get_matrix() * vec;
+    x[2] = p0[0];
+    y[2] = p0[1];
+    z[2] = p0[2];
+
+    vector<double> coef(4);
+    coef[3] = -x[0] * (y[1] * z[2] - y[2] * z[1]) - x[1] * (y[2] * z[0] - y[0] * z[2]) - x[2] * (y[0] * z[1] - y[1] * z[0]);
+    coef[0] = (y[0] * (z[1] - z[2]) + y[1] * (z[2] - z[0]) + y[2] * (z[0] - z[1]));
+    coef[1] = (z[0] * (x[1] - x[2]) + z[1] * (x[2] - x[0]) + z[2] * (x[0] - x[1]));
+    coef[2] = (x[0] * (y[1] - y[2]) + x[1] * (y[2] - y[0]) + x[2] * (y[0] - y[1]));
+
+    double len = sqrt(pow(coef[0], 2) + pow(coef[1], 2) + pow(coef[2], 2));
+
+    coef[0] /= len;
+    coef[1] /= len;
+    coef[2] /= len;
+    coef[3] /= -len;
+
+    int dx = 800 / 32;
     for (int i = 0; i < 32; i++) {
-        threads.push_back(thread(drawcircles_thread, ref(p), ref(camera), point, r, 0 + i * dx, (i + 1) * dx));
+        threads.push_back(thread(drawcircles_thread, ref(p), ref(camera), new_point, r, 0 + i * dx, (i + 1) * dx, coef));
     }
 
     for (int i = 0; i < 32; i++) {
