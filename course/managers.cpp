@@ -16,20 +16,10 @@ void Draw_manager::draw_model(Base_draw &drawer, objects_iterator begin, objects
                     draw_iter_model(drawer, model);
                     break;
                 }
-                case 'g': {
-                    Ground ground = *((Ground*)object);
-                    draw_ground(drawer, ground);
-                    break;
-                }
             }
 
         }
     }
-}
-
-void Draw_manager::draw_ground(Base_draw &drawer, Ground ground) {
-    vector<Point_3d> p = ground.get_points();
-    drawer.drawpolygon(p[0], p[1], p[2], p[3]);
 }
 
 void Draw_manager::draw_iter_model(Base_draw &drawer, Model model) {
@@ -38,13 +28,11 @@ void Draw_manager::draw_iter_model(Base_draw &drawer, Model model) {
     vector<int> r;
     for (int i = 0; i < model.get_kol_particles(); i++) {
         Point_3d p = particles[i].get_p();
-        //drawer.drawpoint(p);
-        //drawer.drawcircle(p, particles[i].get_r());
         point.push_back(particles[i].get_p());
         r.push_back(particles[i].get_r());
 
     }
-    drawer.drawcircles(point, r);
+    drawer.drawmodel(point, r, model.get_ground());
 }
 
 void Transfrom_manager::offset_model(double dx, double dy, double dz, objects_iterator begin, objects_iterator end, positions_iterator pos) {

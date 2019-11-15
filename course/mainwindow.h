@@ -6,7 +6,7 @@
 #include <QPainter>
 #include <QFileDialog>
 #include "facade.h"
-#include "buffer.h"
+#include "raytracing.h"
 #include <QMouseEvent>
 
 namespace Ui {

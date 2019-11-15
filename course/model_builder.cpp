@@ -6,6 +6,7 @@ void Model_builder::build_model() {
     if (!model) {
         throw Builder_exceptions();
     }
+    model->set_ground(vector<Point_3d>{Point_3d(-300, 200, 0), Point_3d(500, 200, 0), Point_3d(500, 200, 600)});
 }
 
 void Model_builder::build_particle(double x, double y, double z, int r) {

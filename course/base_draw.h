@@ -14,7 +14,7 @@ public:
     virtual void drawline(Point_3d begin, Point_3d end) = 0;
     virtual void drawpoint(Point_3d point) = 0;
     virtual void drawcircle(Point_3d point, int r) = 0;
-    virtual void drawcircles(vector<Point_3d> point, vector<int> r) = 0;
+    virtual void drawmodel(vector<Point_3d> point, vector<int> r, vector<Point_3d> ground) = 0;
     virtual void drawpolygon(Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4)  = 0;
 };
 

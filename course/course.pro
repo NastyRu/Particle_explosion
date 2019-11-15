@@ -28,26 +28,20 @@ CONFIG += sdk_no_version_check
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    base_builder.cpp \
-    base_draw.cpp \
     camera.cpp \
     commands.cpp \
     draw.cpp \
-    exceptions.cpp \
     facade.cpp \
     file_loader.cpp \
-    iterators.cpp \
     managers.cpp \
     matrix.cpp \
     model.cpp \
     model_builder.cpp \
-    objects.cpp \
     positions.cpp \
     scene_container.cpp \
     points.cpp \
     particles.cpp \
-    ground.cpp \
-    buffer.cpp
+    raytracing.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -70,8 +64,7 @@ HEADERS += \
     points.h \
     particles.h \
     camera.h \
-    ground.h \
-    buffer.h
+    raytracing.h
 
 FORMS += \
         mainwindow.ui

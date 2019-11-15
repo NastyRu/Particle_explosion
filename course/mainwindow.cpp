@@ -17,10 +17,6 @@ MainWindow::MainWindow(QWidget *parent) :
     facade.get_scene_container().add_position(pos);
     facade.get_scene_container().set_current_camera(cam);
 
-    shared_ptr<Ground> ground = make_shared<Ground>(Ground(Point_3d(-300,200,0),Point_3d(500,200,0),Point_3d(500,200,600),Point_3d(-300,200,600)));
-    pos = make_shared<Position>(Position(Point_3d(300,200,300)));
-    facade.get_scene_container().add_object(ground);
-    facade.get_scene_container().add_position(pos);
     ui->setupUi(this);
 }
 
@@ -149,10 +145,6 @@ void MainWindow::on_pushButton_5_clicked()
     facade.get_scene_container().add_position(pos);
     facade.get_scene_container().set_current_camera(cam);
 
-    shared_ptr<Ground> ground = make_shared<Ground>(Ground(Point_3d(-300,200,0),Point_3d(500,200,0),Point_3d(500,200,600),Point_3d(-300,200,600)));
-    pos = make_shared<Position>(Position(Point_3d(300,200,300)));
-    facade.get_scene_container().add_object(ground);
-    facade.get_scene_container().add_position(pos);
     update = true;
     repaint();
 }

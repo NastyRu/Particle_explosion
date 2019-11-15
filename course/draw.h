@@ -5,7 +5,7 @@
 #include <QPainter>
 #include "points.h"
 #include "camera.h"
-#include "buffer.h"
+#include "raytracing.h"
 #include <cmath>
 #include <QPolygon>
 #include <thread>
@@ -21,13 +21,16 @@ public:
     void drawline(Point_3d begin, Point_3d end) override;
     void drawpoint(Point_3d point) override;
     void drawcircle(Point_3d point, int r) override;
-    void drawcircles(vector<Point_3d> point, vector<int> r) override;
+    void drawmodel(vector<Point_3d> point, vector<int> r, vector<Point_3d> ground) override;
     void drawpolygon(Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) override;
+
+    void drawcircles_thread(QPainter &p, Camera &camera, vector<Point_3d> point, vector<int> r, int xmin, int xmax, vector<double> normal);
 
 private:
     QPainter &p;
     Camera &camera;
-    Zbuffer buf;
+
+    Raytracing raytrace;
 };
 
 #endif // DRAW_H

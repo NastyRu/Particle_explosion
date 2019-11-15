@@ -7,7 +7,6 @@
 #include "base_draw.h"
 #include "positions.h"
 #include "camera.h"
-#include "ground.h"
 
 class Base_manager
 {
@@ -33,7 +32,6 @@ public:
 
     void draw_model(Base_draw &drawer, objects_iterator begin, objects_iterator end);
     void draw_iter_model(Base_draw &drawer, Model model);
-    void draw_ground(Base_draw &drawer, Ground ground);
 };
 
 class Transfrom_manager : public Base_manager

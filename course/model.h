@@ -23,8 +23,15 @@ public:
 
     vector<Particle> &get_var_particles();
     char type() override { return 'm'; }
+
+    vector<Point_3d> get_ground();
+    void set_ground(vector<Point_3d> points);
 private:
     vector<Particle> particles;
+
+    Point_3d p1;
+    Point_3d p2;
+    Point_3d p3;
 };
 
 #endif // MODEL_H
