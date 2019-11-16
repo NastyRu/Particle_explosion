@@ -22,8 +22,6 @@ citecolor=black, menucolor=black, filecolor=black,
 \MakeDashesBold
 \fi
 
-\usepackage{graphicx}   % Пакет для включения рисунков
-
 % С такими оно полями оно работает по-умолчанию:
 % \RequirePackage[left=20mm,right=10mm,top=20mm,bottom=20mm,headsep=0pt,includefoot]{geometry}
 % Если вас тошнит от поля в 10мм --- увеличивайте до 20-ти, ну и про переплёт не забывайте:
@@ -65,4 +63,8 @@ name=Equation
 }
 {\end{eqndescNoIndent}}
 
+\usepackage{float}
 
+\usepackage{graphicx} % для вставки рисунков
+\graphicspath{{image/}}
+\DeclareGraphicsExtensions{.pdf, .png, .jpg}
