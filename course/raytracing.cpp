@@ -83,20 +83,20 @@ QColor Raytracing::TraceRay(Camera camera, Point_3d point, vector<Point_3d> cent
             closest.setHsv(closest.hue(), closest.saturation(), closest.value() + 100 * dot / (len(N) * len(L)));
         }
     } else {
-        Point_3d N(normal[0], normal[1], normal[2]);
 
-        bool yes = false;
-        for (int i = 0; i < centr.size(); i++) {
-            double t1 = IntersectRaySphere(P, L, centr[i], r[i]);
-            if (t1 > 0 && t1 < t_max) {
-                t_max = t1;
-                yes = true;
-            }
-        }
+    }
 
-        if (yes) {
-            closest.setHsv(closest.hue(), closest.saturation(), closest.value() - 50);
+    bool yes = false;
+    for (int i = 0; i < centr.size(); i++) {
+        double t1 = IntersectRaySphere(P, L, centr[i], r[i]);
+        if (t1 > 0.01 && t1 < t_max) {
+            t_max = t1;
+            yes = true;
         }
+    }
+
+    if (yes) {
+        closest.setHsv(closest.hue(), closest.saturation(), closest.value() - 50);
     }
     return closest;
 }
