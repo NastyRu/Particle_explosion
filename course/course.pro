@@ -50,7 +50,6 @@ HEADERS += \
     commands.h \
     draw.h \
     draw.h \
-    exceptions.h \
     facade.h \
     file_loader.h \
     iterators.h \
