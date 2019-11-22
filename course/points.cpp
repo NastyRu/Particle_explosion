@@ -65,24 +65,3 @@ void Point_3d::rotate_z(const double angle, const Point_3d &centre) {
     x = centre.x + (tmp.x - centre.x) * cos(ang) + (tmp.y - centre.y) * sin(ang);
     y = centre.y - (tmp.x - centre.x) * sin(ang) + (tmp.y - centre.y) * cos(ang);
 }
-
-Point_2d::Point_2d(Point_3d point) {
-    set_x(point.get_x() + 0.5 * point.get_z());
-    set_y(point.get_y() + 0.5 * point.get_z());
-}
-
-void Point_2d::set_x(const double x) {
-    this->x = x;
-}
-
-void Point_2d::set_y(const double y) {
-    this->y = y;
-}
-
-double Point_2d::get_x() const {
-    return x;
-}
-
-double Point_2d::get_y() const {
-    return y;
-}

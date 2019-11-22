@@ -60,19 +60,21 @@ QColor Raytracing::TraceRay(Camera camera, Point_3d point, vector<Point_3d> cent
         if (t1 > 0 && t1 < closest_t) {
             closest_t = t1;
             closest_i = i;
-            closest = Qt::red;
+            closest = Qt::yellow;
+            if (i == centr.size() - 1)
+                closest = Qt::red;
         }
     }
 
     Point_3d P(cam.get_x() + d.get_x() * closest_t, cam.get_y() + d.get_y() * closest_t, cam.get_z() + d.get_z() * closest_t);
     double t_max = 1;
-    Point_3d L(0 - P.get_x(), 0 - P.get_y(), 0 - P.get_z());
+    Point_3d L(200 - P.get_x(), 200 - P.get_y(), -100 - P.get_z());
 
     if (closest == Qt::white) {
         return closest;
     }
 
-    if (closest == Qt::red) {
+    if (closest == Qt::yellow || closest == Qt::red) {
         Point_3d N(P.get_x() - centr[closest_i].get_x(), P.get_y() - centr[closest_i].get_y(), P.get_z() - centr[closest_i].get_z());
         double length = len(P);
         N = Point_3d(N.get_x() / length, N.get_y() / length, N.get_z() / length);

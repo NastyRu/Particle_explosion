@@ -3,7 +3,6 @@
 
 #include "base_builder.h"
 #include "model.h"
-#include "exceptions.h"
 
 using namespace std;
 
@@ -15,6 +14,7 @@ public:
 
     void build_model();
     void build_particle(double x, double y, double z, int r);
+    void build_main(double x, double y, double z, int r);
 
     shared_ptr<Model> get_result();
 

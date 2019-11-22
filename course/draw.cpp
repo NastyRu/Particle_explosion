@@ -2,9 +2,14 @@
 #include <QDebug>
 
 void DrawQt::drawline(Point_3d begin, Point_3d end) {
-    Point_2d p1 = begin;
-    Point_2d p2 = end;
-    p.drawLine(p1.get_x(), p1.get_y(), p2.get_x(), p2.get_y());
+    vector<double> p1 = {begin.get_x(), begin.get_y(), begin.get_z(), 1};
+    vector<double> p2 = camera.get_matrix() * p1;
+    Point_3d first = {p2[0], p2[1], p2[2]};
+    p1 = {end.get_x(), end.get_y(), end.get_z(), 1};
+    p2 = camera.get_matrix() * p1;
+    Point_3d second = {p2[0], p2[1], p2[2]};
+
+    p.drawLine(first.get_x(), first.get_y(), second.get_x(), second.get_y());
 }
 
 void DrawQt::drawpoint(Point_3d point) {

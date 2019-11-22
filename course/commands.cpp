@@ -136,12 +136,12 @@ void Rotate_camera_command::call(Facade &facade) {
     facade.get_transfrom_manager().rotate_camera(angleX, angleY, begin);
 }
 
-Explosion_command::Explosion_command(objects_iterator begin, objects_iterator end, Point_3d pos) :
+Explosion_command::Explosion_command(objects_iterator begin, objects_iterator end, int speed) :
     Command(begin, end) {
-    this->pos = pos;
+    this->speed = speed;
 }
 
 void Explosion_command::call(Facade &facade) {
-    facade.get_explosion_manager().explosion(begin, end, pos);
+    facade.get_explosion_manager().explosion(begin, end, speed);
 }
 

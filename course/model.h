@@ -26,12 +26,19 @@ public:
 
     vector<Point_3d> get_ground();
     void set_ground(vector<Point_3d> points);
+
+    Particle get_main();
+    void set_main(Particle main);
+
+    void explosion(int speed);
 private:
     vector<Particle> particles;
 
     Point_3d p1;
     Point_3d p2;
     Point_3d p3;
+
+    Particle main;
 };
 
 #endif // MODEL_H

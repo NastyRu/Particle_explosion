@@ -36,7 +36,6 @@ private slots:
     void on_pushButton_10_clicked();
     void on_pushButton_8_clicked();
     void on_pushButton_12_clicked();
-    void mousePressEvent(QMouseEvent *event);
 
 private:
     Ui::MainWindow *ui;

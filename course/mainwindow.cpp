@@ -168,7 +168,7 @@ void MainWindow::on_pushButton_7_clicked()
 //right
 void MainWindow::on_pushButton_9_clicked()
 {
-    Rotate_camera_command command(0, 10 * M_PI / 180, facade.get_scene_container().get_current_camera());
+    Rotate_camera_command command(0, 5 * M_PI / 180, facade.get_scene_container().get_current_camera());
     command.call(facade);
     update = true;
     repaint();
@@ -176,7 +176,7 @@ void MainWindow::on_pushButton_9_clicked()
 //up
 void MainWindow::on_pushButton_11_clicked()
 {
-    Rotate_camera_command command(-10 * M_PI / 180, 0, facade.get_scene_container().get_current_camera());
+    Rotate_camera_command command(-5 * M_PI / 180, 0, facade.get_scene_container().get_current_camera());
     command.call(facade);
     update = true;
     repaint();
@@ -184,7 +184,7 @@ void MainWindow::on_pushButton_11_clicked()
 //down
 void MainWindow::on_pushButton_10_clicked()
 {
-    Rotate_camera_command command(10 * M_PI / 180, 0, facade.get_scene_container().get_current_camera());
+    Rotate_camera_command command(5 * M_PI / 180, 0, facade.get_scene_container().get_current_camera());
     command.call(facade);
     update = true;
     repaint();
@@ -192,38 +192,22 @@ void MainWindow::on_pushButton_10_clicked()
 //right
 void MainWindow::on_pushButton_8_clicked()
 {
-    Rotate_camera_command command(0, -10 * M_PI / 180, facade.get_scene_container().get_current_camera());
+    Rotate_camera_command command(0, -5 * M_PI / 180, facade.get_scene_container().get_current_camera());
     command.call(facade);
     update = true;
     repaint();
+}
+
+void pause(int msec) {
+    QApplication::processEvents(QEventLoop::AllEvents, 1);
 }
 // go
 void MainWindow::on_pushButton_12_clicked()
 {
-    Point_3d pos (100, 200, 100);
-    Explosion_command command(facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), pos);
+    int speed = 10;
+    Explosion_command command(facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), speed);
+
     command.call(facade);
     update = true;
     repaint();
 }
-
-void MainWindow::mousePressEvent(QMouseEvent *event)
-{
-    Point_3d pos;
-    pos.set_x(event->pos().x());
-    pos.set_y(event->pos().y());
-    pos.set_z(0);
-
-    vector<double> p1 = {pos.get_x(), pos.get_y(), pos.get_z(), 1};
-    Object *cam = facade.get_scene_container().get_current_camera()->get();
-    vector<double> p2 = (*(Camera*)cam).get_matrix() * p1;
-
-    pos.set_x(p2[0] - 600);
-    pos.set_y(p2[1] - 600);
-
-    Explosion_command command(facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), pos);
-    command.call(facade);
-    update = true;
-    repaint();
-}
-

@@ -30,22 +30,4 @@ private:
     double z;
 };
 
-class Point_2d
-{
-public:
-    Point_2d() {}
-    Point_2d(Point_3d point);
-    ~Point_2d() {}
-
-    void set_x(const double x);
-    void set_y(const double y);
-
-    double get_x() const;
-    double get_y() const;
-
-private:
-    double x;
-    double y;
-};
-
 #endif // POINTS_H

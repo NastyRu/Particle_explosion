@@ -29,3 +29,15 @@ void Model::set_ground(vector<Point_3d> points) {
     p2 = points[1];
     p3 = points[2];
 }
+
+Particle Model::get_main() {
+    return main;
+}
+
+void Model::set_main(Particle main) {
+    this->main = main;
+}
+
+void Model::explosion(int speed) {
+    main = Particle(Point_3d(main.get_p().get_x() + speed * 2, main.get_p().get_y(), main.get_p().get_z()), main.get_r());
+}
