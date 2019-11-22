@@ -30,7 +30,7 @@ public:
     Particle get_main();
     void set_main(Particle main);
 
-    void explosion(int speed);
+    void explosion(Point_3d speed);
 private:
     vector<Particle> particles;
 

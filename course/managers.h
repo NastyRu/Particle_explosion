@@ -65,8 +65,8 @@ public:
     Explosion_manager() {}
     ~Explosion_manager() {}
 
-    void explosion(objects_iterator begin, objects_iterator end, int speed);
-    void explosion_iter(Model *model, int speed);
+    void explosion(objects_iterator begin, objects_iterator end, Point_3d speed);
+    void explosion_iter(Model *model, Point_3d speed);
 };
 
 #endif // MANAGERS_H

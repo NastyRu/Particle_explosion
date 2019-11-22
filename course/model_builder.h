@@ -13,8 +13,8 @@ public:
     ~Model_builder() override {}
 
     void build_model();
-    void build_particle(double x, double y, double z, int r);
-    void build_main(double x, double y, double z, int r);
+    void build_particle(double x, double y, double z, int r, int m);
+    void build_main(double x, double y, double z, int r, int m);
 
     shared_ptr<Model> get_result();
 

@@ -204,10 +204,13 @@ void pause(int msec) {
 // go
 void MainWindow::on_pushButton_12_clicked()
 {
-    int speed = 10;
+    Point_3d speed(10, 0, 0);
     Explosion_command command(facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), speed);
 
-    command.call(facade);
-    update = true;
-    repaint();
+    for (int i = 0; i < 10; i++) {
+        command.call(facade);
+        update = true;
+        repaint();
+        pause(1);
+    }
 }

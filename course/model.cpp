@@ -38,6 +38,19 @@ void Model::set_main(Particle main) {
     this->main = main;
 }
 
-void Model::explosion(int speed) {
-    main = Particle(Point_3d(main.get_p().get_x() + speed * 2, main.get_p().get_y(), main.get_p().get_z()), main.get_r());
+void Model::explosion(Point_3d speed) {
+    if (0 == main.get_v().get_x() && 0 == main.get_v().get_y() && 0 == main.get_v().get_z()) {
+        main.set_v(speed);
+    }
+
+    vector<Particle> copy_particles;
+    copy_particles.push_back(main);
+    copy_particles.insert(copy_particles.end(), particles.begin(), particles.end());
+    for (int i = 0; i < copy_particles.size(); i++) {
+        for (int j = i; j < particles.size(); j++) {
+
+        }
+    }
+
+    main = Particle(Point_3d(main.get_p().get_x() + speed.get_x() * 2, main.get_p().get_y() + speed.get_y() * 2, main.get_p().get_z()), main.get_r() + + speed.get_z() * 2);
 }

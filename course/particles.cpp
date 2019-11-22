@@ -1,8 +1,7 @@
 #include "particles.h"
 
-Particle::Particle(Point_3d point, Point_3d v, double m, int r) {
+Particle::Particle(Point_3d point, int r, int m) {
     this->point = point;
-    this->speed = v;
     this->m = m;
     this->radius = r;
 }

@@ -132,7 +132,7 @@ void Transfrom_manager::rotate_camera(double angleX, double angleY, objects_iter
     camera->rotation(angleX, angleY);
 }
 
-void Explosion_manager::explosion(objects_iterator begin, objects_iterator end, int speed) {
+void Explosion_manager::explosion(objects_iterator begin, objects_iterator end, Point_3d speed) {
     for (objects_iterator i = begin; i != end; i++) {
         if ((*i)->is_visible()) {
             Object* object = (*i).get();
@@ -142,6 +142,6 @@ void Explosion_manager::explosion(objects_iterator begin, objects_iterator end, 
     }
 }
 
-void Explosion_manager::explosion_iter(Model *model, int speed) {
+void Explosion_manager::explosion_iter(Model *model, Point_3d speed) {
     model->explosion(speed);
 }

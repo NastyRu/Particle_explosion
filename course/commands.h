@@ -141,13 +141,13 @@ private:
 class Explosion_command : Command
 {
 public:
-    Explosion_command(objects_iterator begin, objects_iterator end, int speed);
+    Explosion_command(objects_iterator begin, objects_iterator end, Point_3d speed);
     ~Explosion_command() override {}
 
     void call(Facade &facade) override;
 
 private:
-    int speed;
+    Point_3d speed;
 };
 
 #endif // COMMANDS_H
