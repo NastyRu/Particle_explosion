@@ -19,31 +19,14 @@
 % Стиль титульного листа и заголовки
 \include{00-title}
 
-
 \begin{document}
 
 \frontmatter % выключает нумерацию ВСЕГО; здесь начинаются ненумерованные главы: реферат, введение, глоссарий, сокращения и прочее.
 
-\maketitle %создает титульную страницу
-
-
-%\listoffigures                         % Список рисунков
-
-%\listoftables                          % Список таблиц
-
-%\NormRefs % Нормативные ссылки 
-% Команды \breakingbeforechapters и \nonbreakingbeforechapters
-% управляют разрывом страницы перед главами.
-% По-умолчанию страница разрывается.
-
-% \nobreakingbeforechapters
-% \breakingbeforechapters
-
-\tableofcontents
-
 \include{abstract}
 
-\printnomenclature % Автоматический список сокращений
+\tableofcontents
+%\printnomenclature % Автоматический список сокращений
 
 \include{intro}
 
@@ -60,7 +43,6 @@
 
 
 \include{biblio}
-
 
 \appendix   % Тут идут приложения
 
