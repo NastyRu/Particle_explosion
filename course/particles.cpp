@@ -21,7 +21,7 @@ Particle::Particle(Point_3d point) {
 }
 
 void Particle::set_p(const Point_3d p) {
-    this->point = p;
+    point = p;
 }
 
 Point_3d Particle::get_p() const {
@@ -29,7 +29,7 @@ Point_3d Particle::get_p() const {
 }
 
 void Particle::set_v(const Point_3d v) {
-    this->speed = v;
+    speed = v;
 }
 
 Point_3d Particle::get_v() const {
