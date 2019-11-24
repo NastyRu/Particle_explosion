@@ -24,6 +24,9 @@ public:
     void set_r(const int r);
     int get_r() const;
 
+    void collision(Particle &p);
+    void update(int time);
+
 private:
     Point_3d point;
     Point_3d speed;
