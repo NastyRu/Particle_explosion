@@ -59,34 +59,15 @@ void Model::explosion(Point_3d speed) {
         particles[i].set_v(copy_particles[i + 1].get_v());
     }
 
-    vector<double> x(3);
-    vector<double> y(3);
-    vector<double> z(3);
-    x[0] = p1.get_x();
-    y[0] = p1.get_y();
-    z[0] = p1.get_z();
-    x[1] = p2.get_x();
-    y[1] = p2.get_y();
-    z[1] = p2.get_z();
-    x[2] = p3.get_x();
-    y[2] = p3.get_y();
-    z[2] = p3.get_z();
-
-    vector<double> coef(4);
-    coef[3] = x[0] * (y[1] * z[2] - y[2] * z[1]) + x[1] * (y[2] * z[0] - y[0] * z[2]) + x[2] * (y[0] * z[1] - y[1] * z[0]);
-    coef[0] = (y[0] * (z[1] - z[2]) + y[1] * (z[2] - z[0]) + y[2] * (z[0] - z[1]));
-    coef[1] = (z[0] * (x[1] - x[2]) + z[1] * (x[2] - x[0]) + z[2] * (x[0] - x[1]));
-    coef[2] = (x[0] * (y[1] - y[2]) + x[1] * (y[2] - y[0]) + x[2] * (y[0] - y[1]));
-
     for (size_t i = 0; i < particles.size(); i++) {
         particles[i].update(2);
 
-        double mount;
-        mount = coef[0] * particles[i].get_p().get_x() + coef[1] * particles[i].get_p().get_y() + coef[2] * particles[i].get_p().get_z() + coef[3];
-
-        if (fabs(mount) < particles[i].get_r()) {
+        if (particles[i].get_p().get_y() + particles[i].get_r() > p1.get_y()) {
             particles[i].set_v(Point_3d(particles[i].get_v().get_x(), -particles[i].get_v().get_y(), particles[i].get_v().get_z()));
         }
     }
     main.update(2);
+    if (main.get_p().get_y() + main.get_r() > p1.get_y()) {
+        main.set_v(Point_3d(main.get_v().get_x(), -main.get_v().get_y(), main.get_v().get_z()));
+    }
 }
