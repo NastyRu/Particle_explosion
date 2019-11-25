@@ -84,8 +84,6 @@ QColor Raytracing::TraceRay(Camera camera, Point_3d point, vector<Point_3d> cent
         if (dot > 0) {
             closest.setHsv(closest.hue(), closest.saturation(), closest.value() + 100 * dot / (len(N) * len(L)));
         }
-    } else {
-
     }
 
     bool yes = false;
