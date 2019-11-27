@@ -44,6 +44,11 @@ void Transfrom_manager::offset_iter_model(Model *model, double dx, double dy, do
         Point_3d p = model->get_var_particles()[i].get_p();
         p.offset(dx, dy, dz);
         model->get_var_particles()[i].set_p(p);
+        if (model->get_var_particles()[i].get_p().get_y() + model->get_var_particles()[i].get_r() > model->get_ground()[0].get_y()) {
+            p = model->get_var_particles()[i].get_p();
+            p.offset(0, model->get_ground()[0].get_y() - (model->get_var_particles()[i].get_p().get_y() + model->get_var_particles()[i].get_r()), 0);
+            model->get_var_particles()[i].set_p(p);
+        }
     }
     pos.get_center().offset(dx, dy, dz);
 }
@@ -63,6 +68,12 @@ void Transfrom_manager::scale_iter_model(Model *model, double k, Position &pos) 
         Point_3d p = model->get_var_particles()[i].get_p();
         p.scale(k, pos.get_center());
         model->get_var_particles()[i].set_p(p);
+        model->get_var_particles()[i].set_r(model->get_var_particles()[i].get_r() * k);
+        if ((model->get_var_particles()[i].get_p().get_y() + model->get_var_particles()[i].get_r()) > model->get_ground()[0].get_y()) {
+            p = model->get_var_particles()[i].get_p();
+            p.offset(0, model->get_ground()[0].get_y() - (model->get_var_particles()[i].get_p().get_y() + model->get_var_particles()[i].get_r()), 0);
+            model->get_var_particles()[i].set_p(p);
+        }
     }
 }
 
@@ -81,6 +92,11 @@ void Transfrom_manager::rotate_x_iter_model(Model *model, double angle, Position
         Point_3d p = model->get_var_particles()[i].get_p();
         p.rotate_x(angle, pos.get_center());
         model->get_var_particles()[i].set_p(p);
+        if (model->get_var_particles()[i].get_p().get_y() + model->get_var_particles()[i].get_r() > model->get_ground()[0].get_y()) {
+            p = model->get_var_particles()[i].get_p();
+            p.offset(0, model->get_ground()[0].get_y() - (model->get_var_particles()[i].get_p().get_y() + model->get_var_particles()[i].get_r()), 0);
+            model->get_var_particles()[i].set_p(p);
+        }
     }
 }
 
@@ -99,6 +115,11 @@ void Transfrom_manager::rotate_y_iter_model(Model *model, double angle, Position
         Point_3d p = model->get_var_particles()[i].get_p();
         p.rotate_y(angle, pos.get_center());
         model->get_var_particles()[i].set_p(p);
+        if (model->get_var_particles()[i].get_p().get_y() + model->get_var_particles()[i].get_r() > model->get_ground()[0].get_y()) {
+            p = model->get_var_particles()[i].get_p();
+            p.offset(0, model->get_ground()[0].get_y() - (model->get_var_particles()[i].get_p().get_y() + model->get_var_particles()[i].get_r()), 0);
+            model->get_var_particles()[i].set_p(p);
+        }
     }
 }
 
@@ -117,6 +138,11 @@ void Transfrom_manager::rotate_z_iter_model(Model *model, double angle, Position
         Point_3d p = model->get_var_particles()[i].get_p();
         p.rotate_z(angle, pos.get_center());
         model->get_var_particles()[i].set_p(p);
+        if (model->get_var_particles()[i].get_p().get_y() + model->get_var_particles()[i].get_r() > model->get_ground()[0].get_y()) {
+            p = model->get_var_particles()[i].get_p();
+            p.offset(0, model->get_ground()[0].get_y() - (model->get_var_particles()[i].get_p().get_y() + model->get_var_particles()[i].get_r()), 0);
+            model->get_var_particles()[i].set_p(p);
+        }
     }
 }
 

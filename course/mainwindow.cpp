@@ -18,6 +18,12 @@ MainWindow::MainWindow(QWidget *parent) :
     facade.get_scene_container().set_current_camera(cam);
 
     ui->setupUi(this);
+    ui->pushButton_10->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/down.png);");
+    ui->pushButton_11->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/up.png);");
+    ui->pushButton_8->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/right.png);");
+    ui->pushButton_9->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/left.png);");
+    ui->pushButton_6->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/minus.png);");
+    ui->pushButton_7->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/plus.png);");
 }
 
 MainWindow::~MainWindow()
@@ -31,8 +37,9 @@ void MainWindow::paintEvent(QPaintEvent *)
     QPainter p(this);
     p.setPen(QPen(Qt::white));
     p.setBrush(QBrush(Qt::white));
-    p.drawRect(0, 0, width() - 350, height());
-    p.setClipRect(0, 0, width() - 350, height());
+    p.setClipRect(0, 0, width() - 180, height());
+    p.drawRect(0, 0, width() - 180, height());
+
     Object *cam = facade.get_scene_container().get_current_camera()->get();
     if (facade.get_scene_container().get_objects().size() > 0) {
         DrawQt drawer(p, *(Camera*)cam);
@@ -44,22 +51,27 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 void MainWindow::on_pushButton_clicked()
 {
-    QString str = ui->lineEdit_2->text();
-    if (str.toInt() == 0 && QString::compare(str, "0") != 0) {
+    update = true;
+    QString str = ui->spinBox->text();
+    bool correct = 0;
+    str.toInt(&correct);
+    if (0 == correct) {
         QMessageBox::critical(this,"ошибка","Неверно введены данные");
         return;
     }
     double dx = str.toInt();
 
-    str = ui->lineEdit->text();
-    if (str.toInt() == 0 && QString::compare(str, "0") != 0) {
+    str = ui->spinBox_2->text();
+    str.toInt(&correct);
+    if (0 == correct) {
         QMessageBox::critical(this,"ошибка","Неверно введены данные");
         return;
     }
     double dy = str.toInt();
 
-    str = ui->lineEdit_10->text();
-    if (str.toInt() == 0 && QString::compare(str, "0") != 0) {
+    str = ui->spinBox_3->text();
+    str.toInt(&correct);
+    if (0 == correct) {
         QMessageBox::critical(this,"ошибка","Неверно введены данные");
         return;
     }
@@ -67,14 +79,17 @@ void MainWindow::on_pushButton_clicked()
 
     Offset_command command(dx, dy, dz, facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), facade.get_scene_container().get_begin_position());
     command.call(facade);
-    update = true;
     repaint();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    QString str = ui->lineEdit_11->text();
-    if (fabs(str.toDouble()) < 0.00001 && QString::compare(str, "0") != 0) {
+    update = true;
+    QString str = ui->doubleSpinBox->text();
+    str.replace(',', '.');
+    bool correct = 0;
+    str.toDouble(&correct);
+    if (0 == correct) {
         QMessageBox::critical(this,"ошибка","Неверно введены данные");
         return;
     }
@@ -82,14 +97,16 @@ void MainWindow::on_pushButton_2_clicked()
 
     Scale_command command(k, facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), facade.get_scene_container().get_begin_position());
     command.call(facade);
-    update = true;
     repaint();
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    QString str = ui->lineEdit_7->text();
-    if (str.toInt() == 0 && QString::compare(str, "0") != 0) {
+    update = true;
+    QString str = ui->spinBox_4->text();
+    bool correct = 0;
+    str.toInt(&correct);
+    if (0 == correct) {
         QMessageBox::critical(this,"ошибка","Неверно введены данные");
         return;
     }
@@ -98,8 +115,9 @@ void MainWindow::on_pushButton_3_clicked()
     Rotate_x_command command_x(anx, facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), facade.get_scene_container().get_begin_position());
     command_x.call(facade);
 
-    str = ui->lineEdit_8->text();
-    if (str.toInt() == 0 && QString::compare(str, "0") != 0) {
+    str = ui->spinBox_5->text();
+    str.toInt(&correct);
+    if (0 == correct) {
         QMessageBox::critical(this,"ошибка","Неверно введены данные");
         return;
     }
@@ -108,8 +126,9 @@ void MainWindow::on_pushButton_3_clicked()
     Rotate_y_command command_y(any, facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), facade.get_scene_container().get_begin_position());
     command_y.call(facade);
 
-    str = ui->lineEdit_9->text();
-    if (str.toInt() == 0 && QString::compare(str, "0") != 0) {
+    str = ui->spinBox_6->text();
+    str.toInt(&correct);
+    if (0 == correct) {
         QMessageBox::critical(this,"ошибка","Неверно введены данные");
         return;
     }
@@ -117,7 +136,7 @@ void MainWindow::on_pushButton_3_clicked()
 
     Rotate_z_command command_z(anz, facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), facade.get_scene_container().get_begin_position());
     command_z.call(facade);
-    update = true;
+
     repaint();
 }
 
@@ -133,6 +152,7 @@ void MainWindow::on_pushButton_4_clicked()
     update = true;
     repaint();
 }
+
 //clear
 void MainWindow::on_pushButton_5_clicked()
 {
@@ -198,7 +218,7 @@ void MainWindow::on_pushButton_8_clicked()
     repaint();
 }
 
-void pause(int msec) {
+void pause() {
     QApplication::processEvents(QEventLoop::AllEvents, 1);
 }
 // go
@@ -211,6 +231,6 @@ void MainWindow::on_pushButton_12_clicked()
         command.call(facade);
         update = true;
         repaint();
-        pause(1);
+        pause();
     }
 }
