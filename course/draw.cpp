@@ -55,7 +55,7 @@ void DrawQt::drawpolygon(Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
 
 void DrawQt::drawcircles_thread(QPainter &p, Camera &camera, vector<Point_3d> point, vector<int> r, int xmin, int xmax, vector<double> normal) {
     for (int x = xmin; x < xmax; x++) {
-        for (int y = 0; y < 600; y++) {
+        for (int y = 0; y < 634; y++) {
             QColor color = raytrace.TraceRay(camera, Point_3d(x, y, 0 - camera.get_position().get_z()), point, r, normal);
             data_lock.lock();
             p.setPen(color);
