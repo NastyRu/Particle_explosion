@@ -3,6 +3,7 @@
 
 #include "base_builder.h"
 #include "model.h"
+#include <QDebug>
 
 using namespace std;
 

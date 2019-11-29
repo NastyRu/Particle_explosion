@@ -3,6 +3,7 @@
 
 #include "particles.h"
 #include "iterators.h"
+#include <QDebug>
 
 class Position
 {

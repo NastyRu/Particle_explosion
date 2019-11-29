@@ -9,6 +9,7 @@
 #include <cmath>
 #include <QPolygon>
 #include <thread>
+#include <QDebug>
 
 static mutex data_lock;
 

@@ -1,10 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "draw.h"
-#include "commands.h"
-#include <QDebug>
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -142,6 +138,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_4_clicked()
 {
+    update = true;
     QString filename = QFileDialog::getOpenFileName(nullptr, "Open Dialog", "", "*.txt");
     if (filename.isEmpty()) {
         QMessageBox::critical(this,"ошибка","Файл отсутствует, повторите ввод");

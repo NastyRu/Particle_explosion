@@ -1,5 +1,4 @@
 #include "raytracing.h"
-#include <QDebug>
 
 double Raytracing::scalar(Point_3d v1, Point_3d v2) {
     double s = v1.get_x() * v2.get_x() + v1.get_y() * v2.get_y() + v1.get_z() * v2.get_z();

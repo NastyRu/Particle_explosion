@@ -1,5 +1,4 @@
 #include "model_builder.h"
-#include <QDebug>
 
 void Model_builder::build_model() {
     model = make_shared<Model>();

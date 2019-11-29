@@ -1,5 +1,4 @@
 #include "positions.h"
-#include <QDebug>
 
 Position::Position(Point_3d center) {
     this->center = center;

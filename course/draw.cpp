@@ -1,5 +1,4 @@
 #include "draw.h"
-#include <QDebug>
 
 void DrawQt::drawline(Point_3d begin, Point_3d end) {
     vector<double> p1 = {begin.get_x(), begin.get_y(), begin.get_z(), 1};

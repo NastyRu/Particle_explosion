@@ -8,6 +8,9 @@
 #include "facade.h"
 #include "raytracing.h"
 #include <QMouseEvent>
+#include "draw.h"
+#include "commands.h"
+#include <QDebug>
 
 namespace Ui {
 class MainWindow;

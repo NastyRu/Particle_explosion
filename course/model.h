@@ -4,6 +4,7 @@
 #include "objects.h"
 #include "base_draw.h"
 #include "particles.h"
+#include <QDebug>
 
 using namespace std;
 
