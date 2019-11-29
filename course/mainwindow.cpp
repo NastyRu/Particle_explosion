@@ -222,12 +222,19 @@ void pause() {
     QApplication::processEvents(QEventLoop::AllEvents, 1);
 }
 // go
+#include <chrono>
+using namespace std::chrono;
+
 void MainWindow::on_pushButton_12_clicked()
 {
     Point_3d speed(10, 0, 0);
     Explosion_command command(facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), speed);
+    high_resolution_clock::time_point t1, t2;
 
     for (int i = 0; i < 50; i++) {
+        t1 = high_resolution_clock::now();
+        qDebug() << duration_cast<microseconds>(t1 - t2).count();
+        t2 = high_resolution_clock::now();
         command.call(facade);
         update = true;
         repaint();

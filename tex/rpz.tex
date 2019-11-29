@@ -5,6 +5,8 @@
 
 % Остальные стандартные настройки убраны в preamble.inc.tex.
 \include{preamble.inc}
+\usepackage{wrapfig}
+
 
 % Настройки листингов.
 \ifPDFTeX
@@ -17,9 +19,10 @@
 \include{macros.inc}
 
 % Стиль титульного листа и заголовки
-\include{00-title}
+
 
 \begin{document}
+\include{title}
 
 \frontmatter % выключает нумерацию ВСЕГО; здесь начинаются ненумерованные главы: реферат, введение, глоссарий, сокращения и прочее.
 
