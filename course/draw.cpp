@@ -109,12 +109,12 @@ void DrawQt::drawmodel(vector<Point_3d> point, vector<int> r, vector<Point_3d> g
     coef[2] /= len;
     coef[3] /= len;
 
-    int dx = 800 / 32;
-    for (int i = 0; i < 32; i++) {
+    int dx = 800 / 8;
+    for (int i = 0; i < 8; i++) {
         threads.push_back(thread(&DrawQt::drawcircles_thread, this, ref(p), ref(camera), new_point, r, 0 + i * dx, (i + 1) * dx, coef));
     }
 
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < 8; i++) {
         threads[i].join();
     }
 }
