@@ -22,6 +22,11 @@ shared_ptr<Model> File_loader::load_model(Model_builder builder) {
     int n;
 
     file >> n;
+
+    if (n <= 0) {
+        return nullptr;
+    }
+
     for (int i = 0; i < n - 1; i++) {
         file >> x >> y >> z >> r >> m;
         builder.build_particle(x, y, z, r, m);

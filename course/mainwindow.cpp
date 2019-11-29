@@ -143,6 +143,10 @@ void MainWindow::on_pushButton_3_clicked()
 void MainWindow::on_pushButton_4_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(nullptr, "Open Dialog", "", "*.txt");
+    if (filename.isEmpty()) {
+        QMessageBox::critical(this,"ошибка","Файл отсутствует, повторите ввод");
+        return;
+    }
     const char *f = filename.toStdString().c_str();
 
     File_loader file_loader(f);

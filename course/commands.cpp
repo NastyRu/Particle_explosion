@@ -16,6 +16,10 @@ Load_command::Load_command(File_loader &file_loade, Model_builder &builde) :
 
 void Load_command:: call(Facade &facade) {
     shared_ptr<Model> model = facade.get_work_with_file_manager().loader_from_file(file_loader, builder);
+    if (nullptr == model) {
+        return;
+    }
+
     Position pos(model->get_particles());
     facade.get_scene_container().add_position(make_shared<Position>(pos));
     facade.get_scene_container().add_object(model);
