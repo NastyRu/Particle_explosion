@@ -18,8 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_11->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/up.png);");
     ui->pushButton_8->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/right.png);");
     ui->pushButton_9->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/left.png);");
-    ui->pushButton_6->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/minus.png);");
-    ui->pushButton_7->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/plus.png);");
+    ui->pushButton_6->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/plus.png);");
+    ui->pushButton_7->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/minus.png);");
 }
 
 MainWindow::~MainWindow()

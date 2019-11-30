@@ -72,6 +72,7 @@ void DrawQt::drawmodel(vector<Point_3d> point, vector<int> r, vector<Point_3d> g
         vector<double> vec1 = {point[i].get_x(), point[i].get_y(), point[i].get_z(), 1};
         vector<double> p1 = camera.get_matrix() * vec1;
         new_point.push_back(Point_3d(p1[0], p1[1], p1[2]));
+        r[i] *= camera.get_matrix()[0][0];
     }
 
     vector<double> vec = {ground[0].get_x(), ground[0].get_y(), ground[0].get_z()};

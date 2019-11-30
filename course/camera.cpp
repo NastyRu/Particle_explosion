@@ -13,9 +13,25 @@ Matrix Camera::get_matrix(){
 }
 
 void Camera::scale(double k) {
-    matrix[0][0] *= k;
-    matrix[1][1] *= k;
-    matrix[2][2] *= k;
+    Matrix matrixK = Matrix(3,3);
+    matrixK[0][0] = k;
+    matrixK[1][1] = k;
+    matrixK[2][2] = k;
+
+    Matrix cam = Matrix(3,3);
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cam[i][j] = matrix[i][j];
+        }
+    }
+
+    cam = cam * matrixK;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            matrix[i][j] = cam[i][j];
+        }
+    }
 }
 
 void Camera::rotation(double angleX, double angleY) {
