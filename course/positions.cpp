@@ -5,7 +5,8 @@ Position::Position(Point_3d center) {
 }
 
 Position::Position(vector<Particle> particle) {
-    double max_x, min_x, max_y, min_y, max_z, min_z;
+    Point_3d p = particle[0].get_p();
+    double max_x = p.get_x(), min_x = p.get_x(), max_y = p.get_y(), min_y = p.get_y(), max_z = p.get_z(), min_z = p.get_z();
     for (int i = 0; i < particle.size(); i++) {
         Point_3d p = particle[i].get_p();
         if (p.get_x() > max_x) {
