@@ -1,5 +1,4 @@
 #include "draw.h"
-#include <QDebug>
 
 void DrawQt::drawline(Point_3d begin, Point_3d end) {
     vector<double> p1 = {begin.get_x(), begin.get_y(), begin.get_z(), 1};
@@ -73,6 +72,7 @@ void DrawQt::drawmodel(vector<Point_3d> point, vector<int> r, vector<Point_3d> g
         vector<double> vec1 = {point[i].get_x(), point[i].get_y(), point[i].get_z(), 1};
         vector<double> p1 = camera.get_matrix() * vec1;
         new_point.push_back(Point_3d(p1[0], p1[1], p1[2]));
+        r[i] *= camera.get_matrix()[0][0];
     }
 
     vector<double> vec = {ground[0].get_x(), ground[0].get_y(), ground[0].get_z()};
@@ -109,12 +109,12 @@ void DrawQt::drawmodel(vector<Point_3d> point, vector<int> r, vector<Point_3d> g
     coef[2] /= len;
     coef[3] /= len;
 
-    int dx = 800 / 16;
-    for (int i = 0; i < 16; i++) {
+    int dx = 800 / 8;
+    for (int i = 0; i < 8; i++) {
         threads.push_back(thread(&DrawQt::drawcircles_thread, this, ref(p), ref(camera), new_point, r, 0 + i * dx, (i + 1) * dx, coef));
     }
 
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 8; i++) {
         threads[i].join();
     }
 }

@@ -1,10 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "draw.h"
-#include "commands.h"
-#include <QDebug>
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -22,8 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_11->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/up.png);");
     ui->pushButton_8->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/right.png);");
     ui->pushButton_9->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/left.png);");
-    ui->pushButton_6->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/minus.png);");
-    ui->pushButton_7->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/plus.png);");
+    ui->pushButton_6->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/plus.png);");
+    ui->pushButton_7->setStyleSheet("border-image:url(/Users/anastasia/Desktop/university/3_course/Particle_explosion/course/img/minus.png);");
 }
 
 MainWindow::~MainWindow()
@@ -142,7 +138,12 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_4_clicked()
 {
+    update = true;
     QString filename = QFileDialog::getOpenFileName(nullptr, "Open Dialog", "", "*.txt");
+    if (filename.isEmpty()) {
+        QMessageBox::critical(this,"ошибка","Файл отсутствует, повторите ввод");
+        return;
+    }
     const char *f = filename.toStdString().c_str();
 
     File_loader file_loader(f);
@@ -227,7 +228,7 @@ using namespace std::chrono;
 
 void MainWindow::on_pushButton_12_clicked()
 {
-    Point_3d speed(10, 0, 0);
+    Point_3d speed(ui->horizontalSlider->value(), 0, 0);
     Explosion_command command(facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), speed);
     high_resolution_clock::time_point t1, t2;
 

@@ -2,6 +2,7 @@
 #define COMMANDS_H
 
 #include "facade.h"
+#include <QMessageBox>
 
 class Command
 {

@@ -1,5 +1,4 @@
 #include "scene_container.h"
-#include <QDebug>
 
 objects_iterator Scene_container::get_begin_object() {
     return objects.begin();

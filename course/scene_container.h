@@ -5,6 +5,7 @@
 #include "positions.h"
 #include "iterators.h"
 #include "camera.h"
+#include <QDebug>
 
 using namespace std;
 

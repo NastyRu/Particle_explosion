@@ -4,6 +4,7 @@
 #include "matrix.h"
 #include <QColor>
 #include "camera.h"
+#include <QDebug>
 
 class Raytracing{
 public:
