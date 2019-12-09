@@ -235,3 +235,9 @@ void MainWindow::on_pushButton_12_clicked()
         pause();
     }
 }
+
+void MainWindow::on_horizontalSlider_sliderMoved(int position)
+{
+    ui->label_7->setNum(position);
+    ui->label_7->setGeometry(ui->label_2->x() + 10 * (position - 1), ui->label_2->y(), ui->label_2->width(), ui->label_2->height());
+}

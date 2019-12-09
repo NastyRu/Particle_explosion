@@ -147,7 +147,7 @@
     <property name="geometry">
      <rect>
       <x>800</x>
-      <y>540</y>
+      <y>550</y>
       <width>161</width>
       <height>24</height>
      </rect>
@@ -622,7 +622,7 @@
     <property name="geometry">
      <rect>
       <x>800</x>
-      <y>520</y>
+      <y>510</y>
       <width>160</width>
       <height>16</height>
      </rect>
@@ -631,13 +631,52 @@
      <number>1</number>
     </property>
     <property name="maximum">
-     <number>20</number>
+     <number>15</number>
     </property>
     <property name="value">
      <number>10</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>530</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>530</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>15</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>530</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>10</string>
     </property>
    </widget>
   </widget>

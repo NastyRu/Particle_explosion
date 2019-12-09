@@ -40,6 +40,8 @@ private slots:
     void on_pushButton_8_clicked();
     void on_pushButton_12_clicked();
 
+    void on_horizontalSlider_sliderMoved(int position);
+
 private:
     Ui::MainWindow *ui;
     bool update;
