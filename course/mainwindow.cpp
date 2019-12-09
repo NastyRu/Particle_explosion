@@ -228,7 +228,7 @@ void MainWindow::on_pushButton_12_clicked()
     Point_3d speed(ui->horizontalSlider->value(), 0, 0);
     Explosion_command command(facade.get_scene_container().get_begin_object(), facade.get_scene_container().get_end_object(), speed);
 
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 500; i++) {
         command.call(facade);
         update = true;
         repaint();
