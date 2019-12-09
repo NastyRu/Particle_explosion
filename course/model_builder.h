@@ -1,17 +1,16 @@
 #ifndef MODEL_BUILDER_H
 #define MODEL_BUILDER_H
 
-#include "base_builder.h"
 #include "model.h"
 #include <QDebug>
 
 using namespace std;
 
-class Model_builder : public Base_builder
+class Model_builder
 {
 public:
     Model_builder() {}
-    ~Model_builder() override {}
+    ~Model_builder() {}
 
     void build_model();
     void build_particle(double x, double y, double z, int r, int m);

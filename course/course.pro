@@ -45,8 +45,6 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
-    base_builder.h \
-    base_draw.h \
     commands.h \
     draw.h \
     draw.h \

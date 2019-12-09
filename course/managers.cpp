@@ -4,7 +4,7 @@ shared_ptr<Model> Work_with_file_manager::loader_from_file(File_loader &file_loa
     return file_loader.load_model(builder);
 }
 
-void Draw_manager::draw_model(Base_draw &drawer, objects_iterator begin, objects_iterator end) {
+void Draw_manager::draw_model(DrawQt &drawer, objects_iterator begin, objects_iterator end) {
     for (objects_iterator i = begin; i != end; i++) {
         if ((*i)->is_visible()) {
             Object* object = (*i).get();
@@ -15,7 +15,7 @@ void Draw_manager::draw_model(Base_draw &drawer, objects_iterator begin, objects
     }
 }
 
-void Draw_manager::draw_iter_model(Base_draw &drawer, Model model) {
+void Draw_manager::draw_iter_model(DrawQt &drawer, Model model) {
     vector<Particle> particles = model.get_particles();
     vector<Point_3d> point;
     vector<int> r;

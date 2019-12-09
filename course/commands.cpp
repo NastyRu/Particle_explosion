@@ -29,11 +29,11 @@ void Load_command:: call(Facade &facade) {
     facade.get_scene_container().add_object(model);
 }
 
-Draw_command::Draw_command(Base_draw &drawe, objects_iterator begin) :
+Draw_command::Draw_command(DrawQt &drawe, objects_iterator begin) :
     Command(begin), drawer(drawe) {
 }
 
-Draw_command::Draw_command(Base_draw &drawe, objects_iterator begin, objects_iterator end) :
+Draw_command::Draw_command(DrawQt &drawe, objects_iterator begin, objects_iterator end) :
     Command(begin, end), drawer(drawe) {
 }
 

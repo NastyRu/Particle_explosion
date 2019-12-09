@@ -4,7 +4,7 @@
 #include "model.h"
 #include "file_loader.h"
 #include "iterators.h"
-#include "base_draw.h"
+#include "draw.h"
 #include "positions.h"
 #include "camera.h"
 
@@ -30,8 +30,8 @@ public:
     Draw_manager() {}
     ~Draw_manager() {}
 
-    void draw_model(Base_draw &drawer, objects_iterator begin, objects_iterator end);
-    void draw_iter_model(Base_draw &drawer, Model model);
+    void draw_model(DrawQt &drawer, objects_iterator begin, objects_iterator end);
+    void draw_iter_model(DrawQt &drawer, Model model);
 };
 
 class Transfrom_manager : public Base_manager

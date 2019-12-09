@@ -35,14 +35,14 @@ private:
 class Draw_command : Command
 {
 public:
-    Draw_command(Base_draw &drawe, objects_iterator begin);
-    Draw_command(Base_draw &drawe, objects_iterator begin, objects_iterator end);
+    Draw_command(DrawQt &drawe, objects_iterator begin);
+    Draw_command(DrawQt &drawe, objects_iterator begin, objects_iterator end);
     ~Draw_command() override {}
 
     void call(Facade &facade) override;
 
 private:
-    Base_draw &drawer;
+    DrawQt &drawer;
 };
 
 class Offset_command : Command
