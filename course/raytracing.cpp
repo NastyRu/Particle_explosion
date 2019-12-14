@@ -43,7 +43,7 @@ double Raytracing::IntersectRayPlane(Point_3d camera_pos, Point_3d d, vector<dou
 
 QColor Raytracing::TraceRay(Camera camera, Point_3d point, vector<Point_3d> centr, vector<int> r, vector<double> normal) {
     Point_3d cam(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z());
-    Point_3d d((point.get_x() - cam.get_x()) * 0.5, (point.get_y() - cam.get_y()) * 0.5, 100 - cam.get_z());
+    Point_3d d((point.get_x() - cam.get_x()), (point.get_y() - cam.get_y()), point.get_z() - cam.get_z());
     double closest_t = 10000;
     QColor closest = Qt::white;
     int closest_i = 0;
@@ -88,7 +88,7 @@ QColor Raytracing::TraceRay(Camera camera, Point_3d point, vector<Point_3d> cent
     bool yes = false;
     for (int i = 0; i < centr.size(); i++) {
         double t1 = IntersectRaySphere(P, L, centr[i], r[i]);
-        if (t1 > 0.01 && t1 < t_max) {
+        if (t1 > 0.001 && t1 < t_max) {
             t_max = t1;
             yes = true;
         }
