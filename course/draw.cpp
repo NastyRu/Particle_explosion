@@ -55,7 +55,7 @@ void DrawQt::drawpolygon(Point_3d p1, Point_3d p2, Point_3d p3, Point_3d p4) {
 void DrawQt::drawcircles_thread(QPainter &p, Camera &camera, vector<Point_3d> point, vector<int> r, int xmin, int xmax, vector<double> normal) {
     for (int x = xmin; x < xmax; x++) {
         for (int y = 0; y < 634; y++) {
-            QColor color = raytrace.TraceRay(camera, Point_3d(x, y, 0 - camera.get_position().get_z()), point, r, normal);
+            QColor color = raytrace.TraceRay(camera, Point_3d(x, y, 100), point, r, normal);
             data_lock.lock();
             p.setPen(color);
             p.drawPoint(x, y);
@@ -72,7 +72,7 @@ void DrawQt::drawmodel(vector<Point_3d> point, vector<int> r, vector<Point_3d> g
         vector<double> vec1 = {point[i].get_x(), point[i].get_y(), point[i].get_z(), 1};
         vector<double> p1 = camera.get_matrix() * vec1;
         new_point.push_back(Point_3d(p1[0], p1[1], p1[2]));
-        r[i] *= camera.get_matrix()[0][0];
+        r[i] *= camera.get_matrix()[1][1];
     }
 
     vector<double> vec = {ground[0].get_x(), ground[0].get_y(), ground[0].get_z()};
