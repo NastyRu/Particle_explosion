@@ -21,7 +21,7 @@
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.8]{coords}
-	\caption{Экранная система координат с позицией камеры в начальный момент}
+	\caption{Экранная система координат с позицией камеры в начальный момент. }
 	\label{img:coords}
 \end{figure}
 
@@ -35,7 +35,7 @@
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{raytrace}
-	\caption{1 шаг алгоритма трассировки лучей}
+	\caption{1 шаг алгоритма трассировки лучей. }
 	\label{img:raytrace}
 \end{figure}
 
@@ -54,7 +54,7 @@
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{sphera}
-	\caption{Пересечение луча со сферой}
+	\caption{Пересечение луча со сферой. }
 	\label{img:sphera}
 \end{figure}
 
@@ -108,7 +108,7 @@ $$t^2 \vec d^2  - 2  t \cdot (\vec d, \vec s) + \vec s ^2 = r^2$$, где $(d,s)
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{plane}
-	\caption{Пересечение луча с плоскостью}
+	\caption{Пересечение луча с плоскостью. }
 	\label{img:plane}
 \end{figure}
 
@@ -156,7 +156,7 @@ $$t^2 \vec d^2  - 2  t \cdot (\vec d, \vec s) + \vec s ^2 = r^2$$, где $(d,s)
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{diffusion}
-	\caption{Диффузное отражение}
+	\caption{Диффузное отражение. }
 	\label{img:diffusion}
 \end{figure}
 
@@ -180,11 +180,11 @@ $$t^2 \vec d^2  - 2  t \cdot (\vec d, \vec s) + \vec s ^2 = r^2$$, где $(d,s)
 
 \begin{equation}
 	\centering
-	cos(\alpha) = \frac{QR}{PR} = \frac{I}{A}
+	\cos{\alpha} = \frac{QR}{PR} = \frac{I}{A}
  	\label{eq:angle}
 \end{equation}
 
-$$cos(\alpha) = \frac{(\vec n, \vec l)}{|\vec n||\vec L|}$$
+$$\cos{\alpha} = \frac{(\vec n, \vec l)}{|\vec n||\vec L|}$$
 
 \textbf{Тени}
 
@@ -195,7 +195,7 @@ $$cos(\alpha) = \frac{(\vec n, \vec l)}{|\vec n||\vec L|}$$
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{shadows}
-	\caption{Тени}
+	\caption{Тени. }
 	\label{img:shadows}
 \end{figure}
 
@@ -224,7 +224,7 @@ $$cos(\alpha) = \frac{(\vec n, \vec l)}{|\vec n||\vec L|}$$
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.6]{coords_explosion}
-		\caption{}
+		\caption{Преобразование координат. }
 		\label{img:coords_explosion}
 	\end{figure}
 	
@@ -232,8 +232,8 @@ $$cos(\alpha) = \frac{(\vec n, \vec l)}{|\vec n||\vec L|}$$
 	
 	\begin{equation}
 		\begin{pmatrix}
-			cos(\varphi)& sin(\varphi) & 0\\
-			-sin(\varphi)& cos(\varphi) & 0\\
+			\cos{\varphi}& \sin{\varphi} & 0\\
+			-\sin{\varphi}& \cos{\varphi} & 0\\
 			0&0&1
 		\end{pmatrix}
 		\label{eq:matr_varphi}
@@ -243,9 +243,9 @@ $$cos(\alpha) = \frac{(\vec n, \vec l)}{|\vec n||\vec L|}$$
 	
 	\begin{equation}
 		\begin{pmatrix}
-			cos(\theta)& 0 & -sin(\theta)\\
+			\cos{\theta}& 0 & -\sin{\theta}\\
 			0& 1 & 0\\
-			sin(\theta)&0&cos(\theta)
+			\sin{\theta}&0&\cos{\theta}
 		\end{pmatrix}
 		\label{eq:matr_theta}
 	\end{equation}
@@ -254,9 +254,9 @@ $$cos(\alpha) = \frac{(\vec n, \vec l)}{|\vec n||\vec L|}$$
 	
 	\begin{equation}
 		\begin{pmatrix}
-			cos(\theta)cos(\varphi)& cos(\theta)sin(\varphi) & -sin(\theta)\\
-			-sin(\varphi)& cos(\varphi) & 0\\
-			sin(\theta)cos(\varphi)&sin(\theta)sin(\varphi)&cos(\theta)
+			\cos{\theta}\cos{\varphi}& \cos{\theta}\sin{\varphi} & -\sin{\theta}\\
+			-\sin{\varphi}& \cos{\varphi} & 0\\
+			\sin{\theta}\cos{\varphi}&\sin{\theta}\sin{\varphi}&\cos{\theta}
 		\end{pmatrix}
 		\label{eq:matr_rotate}
 	\end{equation}
@@ -265,9 +265,9 @@ $$cos(\alpha) = \frac{(\vec n, \vec l)}{|\vec n||\vec L|}$$
 	
 	\begin{equation}
 		\begin{pmatrix}
-			cos(\theta)cos(\varphi)& -sin(\varphi) & sin(\theta)cos(\varphi)\\
-			cos(\theta)sin(\varphi)& cos(\varphi) & sin(\theta)sin(\varphi)\\
-			-sin(\theta)&0&cos(\theta)
+			\cos{\theta}\cos{\varphi}& -\sin{\varphi} & \sin{\theta}\cos{\varphi}\\
+			\cos{\theta}\sin{\varphi}& \cos{\varphi} & \sin{\theta}\sin{\varphi}\\
+			-\sin{\theta}&0&\cos{\theta}
 		\end{pmatrix}
 		\label{eq:matr_transpose}
 	\end{equation}
@@ -276,12 +276,12 @@ $$cos(\alpha) = \frac{(\vec n, \vec l)}{|\vec n||\vec L|}$$
 	\item Нахождение новых скоростей, решением системы уравнений \ref{eq:system}.  
 	
 	\begin{equation}
-		\begin{matrix}
-			m_1 v_{1,x} = m_1 v_{1,x}' + m_2 v_{2,z}' tg(\alpha)cos(\beta)\\
-			m_1 v_{1,y} = m_1 v_{1,y}' + m_2 v_{2,z}'tg(\alpha)sin(\beta)\\
+		\begin{cases}
+			m_1 v_{1,x} = m_1 v_{1,x}' + m_2 v_{2,z}' \tg{\alpha}\cos{\beta}\\
+			m_1 v_{1,y} = m_1 v_{1,y}' + m_2 v_{2,z}'\tg{\alpha}\sin{\beta}\\
 			m_1 v_{1,z} = m_1 v_{1,z}' + m_2 v_{2,z}'\\
-			\frac{m_1(v_{x,1}^2+v_{y,1}^2+v_{z,1}^2) }{2} =  \frac{m1(v_{x,1}'^2+v_{y,1}'^2+v_{z,1}'^2)}{2} + \frac{m2v_{z,2}'^2(1+tg^2(\alpha))}{2} 
-		\end{matrix}
+			\frac{m_1(v_{x,1}^2+v_{y,1}^2+v_{z,1}^2) }{2} =  \frac{m_1(v_{x,1}'^2+v_{y,1}'^2+v_{z,1}'^2)}{2} + \frac{m_2v_{z,2}'^2(1+\tg{\alpha}^2)}{2} 
+		\end{cases}
 		\label{eq:system}
 	\end{equation}
 
@@ -296,7 +296,7 @@ $$cos(\alpha) = \frac{(\vec n, \vec l)}{|\vec n||\vec L|}$$
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{model}
-	\caption{Структура модели}
+	\caption{Структура модели. }
 	\label{img:model}
 \end{figure}
 
@@ -305,7 +305,7 @@ $$cos(\alpha) = \frac{(\vec n, \vec l)}{|\vec n||\vec L|}$$
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{camera}
-	\caption{Структура камеры}
+	\caption{Структура камеры. }
 	\label{img:camera}
 \end{figure}
 
