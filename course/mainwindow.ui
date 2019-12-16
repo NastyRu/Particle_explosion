@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Курсовой проект по компьютерной графике: Взаимодействие частиц</string>
   </property>
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
