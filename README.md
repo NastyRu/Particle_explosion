@@ -18,6 +18,6 @@ Example of course work
 
 ![facade](tex/image/facade.png)
 
-![command](tex/image/commands.png)
+![command](tex/image/command.png)
 
-![container](tex/image/scenecontainer.png)
+![container](tex/image/container.png)
